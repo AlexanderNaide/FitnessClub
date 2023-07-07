@@ -1,0 +1,23 @@
+<div>
+    <form id="auth" class="w-50 p-3" novalidate ng-submit="authentications()" style="margin-left: auto; margin-right: auto">
+        <div class="modal-header">
+            <h5 class="modal-title">{{modalStatus}}</h5>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group mb-3">
+                <label for="username">Номер карты</label>
+                <input class="form-control" type="text" ng-model="auth.keypass" id="username">
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Пароль</label>
+                <input class="form-control" type="text" ng-model="auth.password" id="password">
+            </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-between">
+            <button class="btn btn-primary" ng-click="registrations()" type="button">Регистрация</button>
+            <button class="btn btn-success" type="submit" >Авторизация</button>
+        </div>
+    </form>
+</div>
