@@ -17,17 +17,13 @@ public class TestController {
 
     @PostMapping("/auth-service/auth")
     public AuthResponse token(@RequestBody AuthRequest request){
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY4OTkzODgwNCwiaWF0IjoxNjg4NzI5MjA0LCJhdXRob3JpdHkiOlsidXNlciJdfQ.bJCA6uPS9Amz58Ykq9yfOwf7CzE5v5FmjsHd14eJyqw";
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MDk1ODE4MSwiaWF0IjoxNjg5NzQ4NTgxLCJhdXRob3JpdHkiOlsidXNlciJdfQ.dq7JV4_77obArhztZX3W4rNhH_ffyNRmWuP9iekDE7Y";
         return new AuthResponse(token);
     }
 
     @PostMapping("/auth-service/reg")
     public AuthResponse reg(@RequestBody AuthRequest request){
-        System.out.println(request.getKeypass());
-        System.out.println(request.getPassword());
-
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY4OTkzODgwNCwiaWF0IjoxNjg4NzI5MjA0LCJhdXRob3JpdHkiOlsidXNlciJdfQ.bJCA6uPS9Amz58Ykq9yfOwf7CzE5v5FmjsHd14eJyqw";
-        return new AuthResponse(token);
+        return token(request);
     }
 
     @GetMapping("/user-service/info")
