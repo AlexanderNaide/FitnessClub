@@ -16,11 +16,24 @@
             <thead>
             <tr>
                 <th>Наименование</th>
+                <th>Количество занятий</th>
+                <th>Дата окончания</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="t in TicketList">
-                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.discipline}}</td>
+            <tr ng-repeat="t in UserInformation.subscriptionDtoList">
+
+                <!--Вариант без открытия-->
+                <td>{{t.disciplineName}}</td>
+                <td>{{t.numOfWorkouts}}</td>
+                <td>{{t.expired}}</td>
+
+                <!--Вариант с открытием каждой позиции-->
+<!--                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.disciplineName}}</td>-->
+<!--                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.numOfWorkouts}}</td>-->
+<!--                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.expired}}</td>-->
+
+
             </tr>
             </tbody>
         </table>
