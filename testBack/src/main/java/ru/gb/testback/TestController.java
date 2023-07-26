@@ -1,10 +1,7 @@
 package ru.gb.testback;
 
 import org.springframework.web.bind.annotation.*;
-import ru.gb.testback.model.AuthRequest;
-import ru.gb.testback.model.AuthResponse;
-import ru.gb.testback.model.TicketDto;
-import ru.gb.testback.model.UserDto;
+import ru.gb.testback.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +38,12 @@ public class TestController {
         System.out.println(userDto.getPassword());
     }
 
-    @GetMapping("/user-service/tickets")
-    public List<TicketDto> tickets(){
-        return List.of(new TicketDto());
+    @GetMapping("/user-service/subscriptions")
+    public List<SubscriptionDto> tickets(){
+        return List.of(new SubscriptionDto(), new SubscriptionDto());
     }
 
-    @GetMapping("/user-service/ticket/{id}")
+    @GetMapping("/user-service/subscriptions/{id}")
     public void getOrderById(@PathVariable Long id){
         System.out.println(id);
     }
