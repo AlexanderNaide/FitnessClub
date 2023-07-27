@@ -21,7 +21,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="t in UserInformation.subscriptionDtoList">
+<!--            <tr ng-repeat="t in UserInformation.subscriptionDtoList">-->
+            <tr ng-repeat="t in subscriptionDtoList">
 
                 <!--Вариант без открытия-->
                 <td>{{t.disciplineName}}</td>
@@ -46,7 +47,7 @@
             <div style="margin-left: 12px; margin-top: 30px; margin-bottom: 8px">
                 <h3>Здесь вероятно нужна какая-то информация об абонементе, но команда еще не решила</h3>
 
-                <h6>Оформлен: {{currentTicket.createdAt}},    Текущий статус: {{currentTicket.status}} </h6>
+                <h6>Оформлен: {{currentSubscription.createdAt}},    Текущий статус: {{currentSubscription.status}} </h6>
             </div>
 
             <div class="modal-footer">

@@ -16,7 +16,7 @@ public class UserDto {
 
     private String password;
 
-    private List<SubscriptionDto> subscriptionDtoList;
+//    private List<SubscriptionDto> subscriptionDtoList;
 
     public UserDto() {
         this.id = 1L;
@@ -25,8 +25,8 @@ public class UserDto {
         this.username = "First User";
         this.phone = "8-900-999-9999";
         this.email = "user@mail.ru";
-        this.subscriptionDtoList = List.of(
-                new SubscriptionDto(), new SubscriptionDto()
-        );
+//        this.subscriptionDtoList = List.of(
+//                new SubscriptionDto(), new SubscriptionDto()
+//        );
     }
 }
