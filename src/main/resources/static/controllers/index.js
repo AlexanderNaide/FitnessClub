@@ -8,6 +8,10 @@
 
     function config($routeProvider){
         $routeProvider
+            .when('/schedule', {
+                templateUrl: 'pages/schedule.html',
+                controller: 'scheduleController'
+            })
             .when('/services', {
                 templateUrl: 'pages/services.html',
                 controller: 'servicesController'

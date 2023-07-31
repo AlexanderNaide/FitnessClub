@@ -1,0 +1,55 @@
+table,
+td {
+	border-top: 1px solid #333;
+}
+thead,
+tfoot {
+	/*background-color: #333;*/
+	color: #fff;
+}
+.fitness{
+	background-color: yellow;
+}
+.dance{
+	background-color: grey;
+}
+.green{
+	background-color: orange;
+}
+.little{
+	background-color: pink;
+}
+.class_col{
+	vertical-align: top;
+}
+.class_grid{
+	height: 6rem;
+	width: 9vw;
+	padding: 6px;
+	border-radius: 10px;
+	border: 1px solid #333;
+	text-align: center;
+	/*font-family: "Arial Black", serif ;*/
+	font-family: math;
+}
+.time_grid{
+	width: 11vw;
+}
+.head_string td{
+	height: 3rem;
+	text-align: center;
+	font-size:16pt;
+	font-weight: bolder;
+}
+.tt_class_title{
+	font-size:12pt;
+}
+.tt_class_message{
+	font-size:8pt;
+}
+.tt_class_instructor{
+	font-size:10pt;
+}
+
+
+

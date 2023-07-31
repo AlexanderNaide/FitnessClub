@@ -1,5 +1,6 @@
 package ru.gb.testback;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.testback.model.*;
 
@@ -10,7 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class TestController {
+
+    private final ScheduleService scheduleService;
 
     @PostMapping("/auth-service/auth")
     public AuthResponse token(@RequestBody AuthRequest request){
@@ -49,5 +53,9 @@ public class TestController {
     }
 
 
+    @GetMapping("/user-service/schedule")
+    public List<ClassDto> getSchedule(){
+        return scheduleService.getScheduleList();
+    }
 
 }
