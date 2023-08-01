@@ -12,18 +12,20 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         'Воскресенье'
     ];
 
-    $scope.timeGrid = [
-        '9:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-        '21:00'
-    ];
+    $scope.timeGrid = [];
+
+    // $scope.timeGrid = [
+    //     '9:00',
+    //     '10:00',
+    //     '11:00',
+    //     '12:00',
+    //     '16:00',
+    //     '17:00',
+    //     '18:00',
+    //     '19:00',
+    //     '20:00',
+    //     '21:00'
+    // ];
 
     // $scope.timeGrid = [
     //     {title: '', day: '   '},
@@ -44,9 +46,14 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             url: contextPath + '/schedule',
             method: 'GET'
         }).then(function (response) {
-            // $scope.scheduleDtoList = $scope.timeGrid.concat(response.data);
-            $scope.scheduleDtoList = response.data;
-            // console.log($scope.scheduleDtoList);
+            let scheduleDtoList = response.data;
+            for (const scheduleDtoListElement of scheduleDtoList) {
+                let time = scheduleDtoListElement.time;
+                if (!$scope.timeGrid.includes(time)){
+                    $scope.timeGrid.push(time);
+                }
+            }
+            $scope.scheduleDtoList = scheduleDtoList;
         });
     };
 

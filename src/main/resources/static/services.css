@@ -2,6 +2,8 @@ table,
 td {
 	/*border-top: 1px solid #333;*/
 	border: 1px solid #333;
+	margin-bottom: 160px;
+	margin-left: -60px;
 }
 thead,
 tfoot {
@@ -11,10 +13,10 @@ tfoot {
 	background-color: #fdfdb8;
 }
 .dance{
-	background-color: #bebebe;
+	background-color: #d2d2d2;
 }
 .green{
-	background-color: #f3d68c;
+	background-color: #bef38c;
 }
 .little{
 	background-color: pink;
@@ -32,6 +34,21 @@ tfoot {
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
 }
+.sticker{
+	height: 4rem;
+	width: 9vw;
+	border-radius: 10px;
+	margin: 6px;
+	display:grid;
+	text-align: center;
+	/*font-family: "Arial Black", serif ;*/
+	font-family: math;
+}
+
+.sticker div {
+	margin: auto 6px auto 6px;
+}
+
 .time_grid{
 	text-align: center;
 	width: 11vw;
