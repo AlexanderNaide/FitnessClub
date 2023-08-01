@@ -7,9 +7,16 @@ angular.module('fitnessClub').controller('authController', function ($scope, $ht
                 if(response.data.token){
                     console.log("Токен получен");
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token};
-
-                    $location.path('/');
+                    let jwt = response.data.token;
+                    let payload = JSON.parse(atob(jwt.split('.')[1]));
+                    $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
+                    console.log('Role: ' + payload.authority);
+                    if (payload.authority == "admin"){
+                        console.log("It's admin");
+                        $location.path('/admin');
+                    } else {
+                        $location.path('/');
+                    }
                 }
             }).catch(function (response) {
             // console.log(response.data.message)

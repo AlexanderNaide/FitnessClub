@@ -1,13 +1,9 @@
-table,
-td {
+.schedule_table.table,
+.schedule_table td {
 	/*border-top: 1px solid #333;*/
 	border: 1px solid #333;
 	margin-bottom: 160px;
-	margin-left: -60px;
-}
-thead,
-tfoot {
-	color: #fff;
+	/*margin-left: -60px;*/
 }
 .fitness{
 	background-color: #fdfdb8;
