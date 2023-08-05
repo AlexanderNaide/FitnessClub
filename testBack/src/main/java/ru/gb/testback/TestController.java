@@ -23,7 +23,7 @@ public class TestController {
         if (request.getKeypass().equals("admin")){
             token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MjA4ODYyNiwiaWF0IjoxNjkwODc5MDI2LCJhdXRob3JpdHkiOlsiYWRtaW4iXX0.ss8i0YmMUqWNx0uwlcilzZ2TFlD3MPVDwaCTfZ-zCEs";
         } else {
-            token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MDk1ODE4MSwiaWF0IjoxNjg5NzQ4NTgxLCJhdXRob3JpdHkiOlsidXNlciJdfQ.dq7JV4_77obArhztZX3W4rNhH_ffyNRmWuP9iekDE7Y";
+            token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MjQ0MTUxMSwiaWF0IjoxNjkxMjMxOTExLCJhdXRob3JpdHkiOlsidXNlciJdfQ.47AgHIaOTT94fkteOVy3e7XtXjxPO3FSR6N_hWC_zW4";
         }
         return new AuthResponse(token);
     }
