@@ -20,7 +20,7 @@ public class TestController {
     public AuthResponse token(@RequestBody AuthRequest request){
         String token;
 
-        if (request.getKeypass().equals("admin")){
+        if (request.getUsername().equals("admin")){
             token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MjA4ODYyNiwiaWF0IjoxNjkwODc5MDI2LCJhdXRob3JpdHkiOlsiYWRtaW4iXX0.ss8i0YmMUqWNx0uwlcilzZ2TFlD3MPVDwaCTfZ-zCEs";
         } else {
             token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MjQ0MTUxMSwiaWF0IjoxNjkxMjMxOTExLCJhdXRob3JpdHkiOlsidXNlciJdfQ.47AgHIaOTT94fkteOVy3e7XtXjxPO3FSR6N_hWC_zW4";
@@ -29,8 +29,20 @@ public class TestController {
     }
 
     @PostMapping("/auth-service/reg")
-    public AuthResponse reg(@RequestBody AuthRequest request){
-        return token(request);
+    public AuthResponse reg(@RequestBody RegRequest request){
+        System.out.println("\nПришло:");
+        System.out.println(request.getUsername());
+        System.out.println(request.getPassword());
+        System.out.println(request.getConfirmPassword());
+        System.out.println(request.getRealName());
+        System.out.println(request.getPhone());
+        System.out.println(request.getEmail());
+
+
+        //логика регистрации, затем:
+
+        AuthRequest authRequest = new AuthRequest(request.getUsername(), request.getPassword());
+        return token(authRequest);
     }
 
     @GetMapping("/user-service/info")
