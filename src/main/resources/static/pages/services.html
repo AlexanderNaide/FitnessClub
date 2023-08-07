@@ -1,6 +1,10 @@
 <div class="row align-items-start">
     <div class="col-3">
-        <h4>Какие-то возможные функции</h4>
+
+        <button class="add_subscription_button" ng-click="getAllSubscriptions()" data-bs-toggle="modal" data-bs-target="#subscriptionsList" ng-click="getSubscriptions()">
+            Добавить абонемент
+        </button>
+
     </div>
     <div class="col-9">
         <nav class="navbar bg-light">
@@ -48,6 +52,46 @@
                 <h3>Здесь вероятно нужна какая-то информация об абонементе, но команда еще не решила</h3>
 
                 <h6>Оформлен: {{currentSubscription.createdAt}},    Текущий статус: {{currentSubscription.status}} </h6>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="subscriptionsList" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div style="margin-left: 12px; margin-top: 30px; margin-bottom: 8px">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Количество занятий</th>
+                        <th>Дата окончания</th>
+                        <th>Стоимость</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="s in addSubscriptionList">
+
+                        <td>{{s.discipline}}</td>
+                        <td>{{s.workoutCount}}</td>
+                        <td>{{s.daysToExpire}}</td>
+                        <td>{{s.price}}</td>
+                        <td><button type="button" class="btn btn-outline-secondary" ng-click="buySubscription(s.id)" ng-show="!isAdded(s.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 20 20">
+                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg></button></td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="modal-footer">

@@ -3,16 +3,16 @@ package ru.gb.testback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.testback.model.*;
+import ru.gb.testback.services.ScheduleService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/three-oceans.fitness/api/v1")
 @CrossOrigin("*")
 @RequiredArgsConstructor
-public class TestController {
+public class TestAccountController {
 
     private final ScheduleService scheduleService;
 
@@ -30,6 +30,7 @@ public class TestController {
 
     @PostMapping("/auth-service/reg")
     public AuthResponse reg(@RequestBody RegRequest request){
+        // это для наглядности
         System.out.println("\nПришло:");
         System.out.println(request.getUsername());
         System.out.println(request.getPassword());
@@ -39,7 +40,7 @@ public class TestController {
         System.out.println(request.getEmail());
 
 
-        //логика регистрации, затем:
+        // здесь логика регистрации, затем:
 
         AuthRequest authRequest = new AuthRequest(request.getUsername(), request.getPassword());
         return token(authRequest);

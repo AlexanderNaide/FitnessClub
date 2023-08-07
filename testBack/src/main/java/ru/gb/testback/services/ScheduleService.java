@@ -1,12 +1,15 @@
-package ru.gb.testback.model;
+package ru.gb.testback.services;
 
 import org.springframework.stereotype.Service;
+import ru.gb.testback.model.ClassDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ScheduleService {
+
+
     public List<ClassDto> getScheduleList() {
         List<ClassDto> list = new ArrayList<>();
         list.add(new ClassDto(0L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Понедельник", "9:00", 1));

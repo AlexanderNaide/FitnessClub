@@ -1,31 +1,38 @@
 angular.module('fitnessClub').controller('servicesController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8081/three-oceans.fitness/api/v1/user-service';
+    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
 
-    // $scope.loadInformation = function () {
-    //     $http({
-    //         url: contextPath + '/info',
-    //         method: 'GET'
-    //     }).then(function (response) {
-    //         console.log(response.data);
-    //         $scope.UserInformation = response.data;
-    //     });
-    // };
-
-
-    $scope.loadSubscriptions = function () {
+    $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextPath + '/subscriptions',
+            url: contextPathSubscriptionService,
             method: 'GET'
         }).then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
             $scope.subscriptionDtoList = response.data;
         });
     };
 
+    $scope.getAllSubscriptions = function () {
+        $http({
+            url: contextPathSubscriptionService + '/get-all',
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data)
+            $scope.addSubscriptionList = response.data;
+        });
+    };
+
+    $scope.buySubscription = function (id){
+        $http({
+            url: contextPathSubscriptionService + "/buy/" + id,
+            method: 'POST'
+        }).then(function () {
+            $scope.loadUserSubscriptions();
+        });
+    };
 
     $scope.getTicketById = function (id){
         $http({
-            url: contextPath + "/subscriptions/" + id,
+            url: contextPathSubscriptionService + "/" + id,
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
@@ -35,6 +42,16 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         });
     };
 
-    // $scope.loadInformation();
-    $scope.loadSubscriptions();
+    $scope.isAdded = function (id){
+        let added = false;
+        for (const sub of $scope.subscriptionDtoList) {
+            if (sub.id === id){
+                added = true;
+                break;
+            }
+        }
+        return added;
+    };
+
+    $scope.loadUserSubscriptions();
 });
