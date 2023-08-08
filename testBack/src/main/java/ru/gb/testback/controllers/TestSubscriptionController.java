@@ -27,9 +27,14 @@ public class TestSubscriptionController {
         return subscriptionsService.getAllSubscriptionList();
     }
 
-    @PostMapping("/buy/{id}")
+    @PostMapping("/subscribe/{id}")
     public void addSubscriptionForUser(@PathVariable Long id){
         subscriptionsService.addSubscriptionForUser(id);
+    }
+
+    @PostMapping("/unsubscribe/{id}")
+    public void deleteSubscriptionForUser(@PathVariable Long id){
+        subscriptionsService.deleteSubscriptionForUser(id);
     }
 
     @GetMapping("/{id}")

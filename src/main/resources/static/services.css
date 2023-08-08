@@ -1,8 +1,11 @@
+.schedule_table{
+	margin-bottom: 160px;
+}
+
 .schedule_table.table,
 .schedule_table td {
 	/*border-top: 1px solid #333;*/
 	border: 1px solid #333;
-	margin-bottom: 160px;
 	/*margin-left: -60px;*/
 }
 .all{
@@ -25,7 +28,7 @@
 }
 .class_grid{
 	height: 6rem;
-	width: 9vw;
+	width: 10vw;
 	padding: 6px;
 	/*border-radius: 10px;*/
 	/*border: 1px solid #333;*/
@@ -42,6 +45,12 @@
 	text-align: center;
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
+}
+
+.collDay{
+	text-align: center;
+	width: 10vw;
+	padding: 6px;
 }
 
 .sticker div {
@@ -76,7 +85,7 @@
 	font-weight:bold;
 }
 
-.item_filter_btn:not(.active){
+.sticker:not(.active){
 	background-color: aliceblue;
 }
 
@@ -96,6 +105,13 @@
 	border: 1px solid;
 	border-radius: 16px;
 	font-size: 20px;
+}
+.signature{
+	margin: 30px 12px;
+}
+
+.signature.active{
+	text-decoration: underline;
 }
 
 

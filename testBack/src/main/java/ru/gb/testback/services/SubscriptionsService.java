@@ -43,5 +43,9 @@ public class SubscriptionsService {
         userSubscriptions.put(id, subscriptionRepository.findById(id));
     }
 
+    public void deleteSubscriptionForUser(Long id){
+        userSubscriptions.remove(id);
+    }
+
 
 }

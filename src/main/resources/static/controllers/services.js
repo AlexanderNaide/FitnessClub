@@ -23,7 +23,16 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
 
     $scope.buySubscription = function (id){
         $http({
-            url: contextPathSubscriptionService + "/buy/" + id,
+            url: contextPathSubscriptionService + "/subscribe/" + id,
+            method: 'POST'
+        }).then(function () {
+            $scope.loadUserSubscriptions();
+        });
+    };
+
+    $scope.deleteSubscription = function (id){
+        $http({
+            url: contextPathSubscriptionService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserSubscriptions();
