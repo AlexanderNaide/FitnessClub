@@ -1,4 +1,4 @@
-package ru.gb.testback;
+package ru.gb.testback.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +73,7 @@ public class TestAccountController {
 
 
     @GetMapping("/user-service/schedule")
-    public List<ClassDto> getSchedule(){
+    public List<Event> getSchedule(){
         return scheduleService.getScheduleList();
     }
 

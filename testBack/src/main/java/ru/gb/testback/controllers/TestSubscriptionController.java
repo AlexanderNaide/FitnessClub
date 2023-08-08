@@ -1,4 +1,4 @@
-package ru.gb.testback;
+package ru.gb.testback.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

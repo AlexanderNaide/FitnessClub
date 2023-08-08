@@ -4,32 +4,23 @@
         <div class="sticker all item_filter_btn active" data-filter="">
             <div class="tt_class_title">ВСЕ ЗАЛЫ</div>
         </div>
-        <div class="sticker item_filter_btn fitness active" data-filter=".fitness">
-            <div class="tt_class_title">ФИТНЕС ЗАЛ</div>
-        </div>
-        <div class="sticker item_filter_btn green active" data-filter=".green">
-            <div class="tt_class_title">ЗЕЛЕНЫЙ ЗАЛ<br>(2 этаж)</div>
-        </div>
-        <div class="sticker item_filter_btn dance active" data-filter=".dance">
-            <div class="tt_class_title">ТАНЦЕВАЛЬНЫЙ ЗАЛ</div>
-        </div>
-        <div class="sticker item_filter_btn little active" data-filter=".little">
-            <div class="tt_class_title">МАЛЫЙ ЗАЛ<br>(2 этаж)</div>
+        <div class="sticker item_filter_btn active {{k}}" data-filter=".{{k}}" ng-repeat="(k, v) in scheduleDto.halls">
+            <div class="tt_class_title">{{v}}</div>
         </div>
     </div>
 </div>
 <table class="schedule_table">
     <tr class="head_string">
         <td></td>
-        <td ng-repeat="day in dayList">{{day}}</td>
+        <td ng-repeat="day in scheduleDto.daysOFWeek">{{day}}</td>
     </tr>
-    <tr class="body_string" ng-repeat="time in timeGrid">
+    <tr class="body_string" ng-repeat="time in scheduleDto.trainingStartTime">
         <td class="time_grid">{{time}}</td>
-        <td class="class_col grid" ng-repeat="day in dayList">
-            <div class="class_grid {{class.place}}" ng-repeat="class in scheduleDtoList" ng-if="class.day == day && class.time == time">
-                <div class="tt_class_title">{{class.title}}</div>
-                <div class="tt_class_message">{{class.message}}</div>
-                <div class="tt_class_instructor">{{class.trainer}}</div>
+        <td class="class_col grid" ng-repeat="day in scheduleDto.events">
+            <div class="class_grid {{class.hall}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time">
+                <div class="tt_class_title">{{class.discipline}}</div>
+                <div class="tt_class_message">{{class.comments }}</div>
+                <div class="tt_class_instructor">{{class.coachName}}</div>
             </div>
         </td>
     </tr>

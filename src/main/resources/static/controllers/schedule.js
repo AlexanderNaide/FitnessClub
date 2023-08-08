@@ -1,43 +1,14 @@
 angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
     const contextPath = 'http://localhost:8081/three-oceans.fitness/api/v1/user-service';
-
-    $scope.dayList = [
-        'Понедельник',
-        'Вторник',
-        'Среда',
-        'Четверг',
-        'Пятница',
-        'Суббота',
-        'Воскресенье'
-    ];
-
-    $scope.timeGrid = [
-        '9:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-        '21:00'
-    ];
+    const contextSchedulePath = 'http://localhost:8081/schedule-service/api/v1/events';
 
     $scope.loadSchedule = function () {
         $http({
-            url: contextPath + '/schedule',
+            url: contextSchedulePath + '/general',
             method: 'GET'
         }).then(function (response) {
-            let scheduleDtoList = response.data;
-            // for (const scheduleDtoListElement of scheduleDtoList) {
-            //     let time = scheduleDtoListElement.time;
-                // if (!$scope.timeGrid.includes(time)){
-                //     $scope.timeGrid.push(time);
-                // }
-                // $scope.timeGrid.sort();
-            // }
-            $scope.scheduleDtoList = scheduleDtoList;;
+            console.log(response.data);
+            $scope.scheduleDto = response.data;
         });
     };
 
