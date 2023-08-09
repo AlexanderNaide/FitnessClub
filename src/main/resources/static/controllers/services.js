@@ -47,7 +47,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             // console.log(response.data);
             $scope.currentSubscription = response.data;
         }).catch(function (response) {
-            alert(response.data.message)
+            alert(response.data.message);
         });
     };
 

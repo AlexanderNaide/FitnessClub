@@ -27,7 +27,7 @@
 	vertical-align: top;
 }
 .class_grid{
-	height: 6rem;
+	/*height: 7rem;*/
 	width: 10vw;
 	padding: 6px;
 	/*border-radius: 10px;*/
@@ -69,15 +69,22 @@
 }
 .tt_class_title{
 	font-size:12pt;
-	height: 60%;
+	height: 3rem;
 }
 .tt_class_message{
 	font-size:8pt;
-	height: 20%;
+	height: 1rem;
 }
 .tt_class_instructor{
 	font-size:10pt;
-	height: 20%;
+	height: 1rem;
+}
+.tt_class_button{
+	font-size:12pt;
+	height: 20px;
+	text-align: right;
+	margin-top: -8px;
+	margin-right: -4px;
 }
 
 .active
@@ -112,6 +119,17 @@
 
 .signature.active{
 	text-decoration: underline;
+}
+.pointer{
+	cursor: pointer;
+}
+
+.class_grid.main .add_button{
+	display: none;
+}
+
+.class_grid:not(.main) .del_button{
+	display: none;
 }
 
 

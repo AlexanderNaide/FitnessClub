@@ -1,5 +1,4 @@
 angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
-    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
     const contextSchedulePath = 'http://localhost:8081/schedule-service/api/v1/events';
 
     $scope.loadSchedule = function () {
@@ -14,23 +13,82 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextPathSubscriptionService,
+            url: contextSchedulePath + '/subscription',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
-            $scope.subscriptionDtoList = response.data;
+
+            // Лист Строк названий дисциплин
+            $scope.userSubscriptionList = response.data;
         });
     };
 
-    $scope.isMainClass = function (discipline){
-        let added = false;
-        for (const sub of $scope.subscriptionDtoList) {
-            if (sub.disciplineName === discipline){
-                added = true;
-                break;
-            }
+    $scope.loadUserEvents = function () {
+        $http({
+            url: contextSchedulePath + '/personal',
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data)
+
+            // Лист Id с номерами событий
+            $scope.userEventList = response.data;
+        });
+    };
+
+    $scope.getEventInformation = function (id) {
+        $http({
+            url: contextSchedulePath + "/" + id + "/info",
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.CurrentEvent = response.data;
+            $('#modalClassInfo').modal('toggle');
+        }).catch(function (response) {
+            alert(response.data.message);
+        });
+    };
+
+    $scope.closeModal = function (modal){
+        $(modal).modal('hide');
+    };
+
+    $scope.isSubscribe = function (id){
+        return $scope.userEventList.includes(id);
+    };
+
+    $scope.isMainClass = function (id){
+        // let added = false;
+
+        // for (const sub of $scope.subscriptionDtoList) {
+        //     if (sub.disciplineName === discipline){
+        //         added = true;
+        //         break;
+        //     }
+        // }
+        // return added ? "main" : null;
+        return $scope.isSubscribe(id) ? "main" : null;
+    };
+
+    $scope.addEvent = function (id, discipline){
+        if(!$scope.userSubscriptionList.includes(discipline)){
+            alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
+        } else {
+            $http({
+                url: contextSchedulePath + "/subscribe/" + id,
+                method: 'POST'
+            }).then(function () {
+                $scope.loadUserEvents();
+            });
         }
-        return added ? "main" : null;
+    };
+
+    $scope.deleteEvent = function (id){
+        $http({
+            url: contextSchedulePath + "/unsubscribe/" + id,
+            method: 'POST'
+        }).then(function () {
+            $scope.loadUserEvents();
+        });
     };
 
     const filters = {};
@@ -75,6 +133,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         return value;
     };
 
+    $scope.loadUserEvents();
     $scope.loadUserSubscriptions();
     $scope.loadSchedule();
 });

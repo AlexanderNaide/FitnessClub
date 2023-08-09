@@ -63,4 +63,8 @@ public class SubscriptionsRepository {
     public SubscriptionResponse findById(Long id){
         return subscriptionRepository.get(id);
     }
+
+    public SubscriptionResponse findByName(String discipline) {
+        return subscriptionRepository.values().stream().filter(e -> e.getDiscipline().equals(discipline)).findFirst().orElse(null);
+    }
 }

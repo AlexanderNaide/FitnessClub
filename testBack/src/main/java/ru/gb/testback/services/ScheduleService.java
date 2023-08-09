@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.testback.model.ClassDto;
 import ru.gb.testback.model.Event;
+import ru.gb.testback.model.SubscriptionDto;
+import ru.gb.testback.model.SubscriptionResponse;
 import ru.gb.testback.model.clubEvents.*;
 import ru.gb.testback.repositories.SchedulesRepository;
 
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ScheduleService {
     private final SchedulesRepository schedulesRepository;
+    private final SubscriptionsService subscriptionsService;
+
+    private Map<Long, ClubEventResponse> userEvents;
 
     private static final List<String> daysOfWeek = List.of(
             "Понедельник",
@@ -27,10 +32,9 @@ public class ScheduleService {
             "Воскресенье"
     );
 
-    private static LinkedHashMap<String, String> halls;
+    public static final LinkedHashMap<String, String> halls;
     static {
         halls = new LinkedHashMap<>();
-//        halls.put("", "ВСЕ ЗАЛЫ");
         halls.put("fitness", "ФИТНЕС ЗАЛ");
         halls.put("green", "ЗЕЛЕНЫЙ ЗАЛ (2 этаж)");
         halls.put("dance", "ТАНЦЕВАЛЬНЫЙ ЗАЛ");
@@ -48,6 +52,14 @@ public class ScheduleService {
         return new ScheduleFrontResponse(halls, daysOfWeek, scheduleTimer, events);
     }
 
+    public List<Long> getUserSchedule() {
+        if(userEvents == null || userEvents.size() == 0){
+            return new ArrayList<>();
+        } else {
+            return userEvents.keySet().stream().toList();
+        }
+    }
+
     private List<DayScheduleResponse> sortEventsByDays(List<Event> events) {
         List<DayScheduleResponse> weekSchedule = new ArrayList<>();
         for (String day : daysOfWeek) {
@@ -57,5 +69,31 @@ public class ScheduleService {
             weekSchedule.add(dayResponse);
         }
         return weekSchedule;
+    }
+
+    public List<SubscriptionDto> getUserSubscriptionList() {
+        return subscriptionsService.getUserSubscriptionList();
+    }
+
+    public void addEventForUser(Long id) {
+        if(userEvents == null){
+            userEvents = new HashMap<>();
+        }
+        ClassDto event = (ClassDto) schedulesRepository.findById(id);
+        if(subscriptionsService.isSubscribe(event.getTitle())){
+            userEvents.put(id, Converter.convertToEventResponse(event));
+        }
+    }
+
+    public void deleteEventForUser(Long id) {
+        userEvents.remove(id);
+    }
+
+    public ClassDto getEventById(Long id){
+        return (ClassDto) schedulesRepository.findById(id);
+    }
+
+    public String findDescriptionByTitle(String title){
+        return schedulesRepository.findDescriptionByTitle(title);
     }
 }

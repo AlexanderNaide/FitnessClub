@@ -20,6 +20,12 @@ public class SubscriptionsService {
     private final SubscriptionsRepository subscriptionRepository;
     private Map<Long, SubscriptionResponse> userSubscriptions;
 
+    public boolean isSubscribe(String discipline){
+        return userSubscriptions.containsValue(getSubscriptionByName(discipline));
+    }
+
+
+
     public List<SubscriptionResponse> getAllSubscriptionList() {
         return subscriptionRepository.findAll().values().stream().toList();
     }
@@ -28,9 +34,13 @@ public class SubscriptionsService {
         return subscriptionRepository.findById(id);
     }
 
+    public SubscriptionResponse getSubscriptionByName(String discipline){
+        return subscriptionRepository.findByName(discipline);
+    }
+
     public List<SubscriptionDto> getUserSubscriptionList() {
-        if (userSubscriptions == null){
-            return null;
+        if (userSubscriptions == null || userSubscriptions.size() == 0){
+            return new ArrayList<>();
         } else {
             return userSubscriptions.values().stream().map(e -> new SubscriptionDto(e.getId(), e.getWorkoutCount(), e.getDiscipline(), LocalDate.now().plusDays(e.getDaysToExpire()))).toList();
         }
