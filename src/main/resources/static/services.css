@@ -1,0 +1,145 @@
+.schedule_table{
+	margin-bottom: 160px;
+}
+
+.schedule_table.table,
+.schedule_table td {
+	/*border-top: 1px solid #333;*/
+	border: 1px solid #333;
+	/*margin-left: -60px;*/
+}
+.all{
+	background-color: aliceblue;
+}
+.fitness{
+	background-color: #fdfdb8;
+}
+.dance{
+	background-color: #d2d2d2;
+}
+.green{
+	background-color: #bef38c;
+}
+.little{
+	background-color: pink;
+}
+.class_col{
+	vertical-align: top;
+}
+.class_grid{
+	/*height: 7rem;*/
+	width: 10vw;
+	padding: 6px;
+	/*border-radius: 10px;*/
+	/*border: 1px solid #333;*/
+	text-align: center;
+	/*font-family: "Arial Black", serif ;*/
+	font-family: math;
+}
+.sticker{
+	height: 4rem;
+	width: 9vw;
+	border-radius: 10px;
+	margin: 6px;
+	display:grid;
+	text-align: center;
+	/*font-family: "Arial Black", serif ;*/
+	font-family: math;
+}
+
+.collDay{
+	text-align: center;
+	width: 10vw;
+	padding: 6px;
+}
+
+.sticker div {
+	margin: auto 6px auto 6px;
+}
+
+.time_grid{
+	text-align: center;
+	width: 11vw;
+}
+.head_string td{
+	height: 3rem;
+	text-align: center;
+	font-size:16pt;
+	font-weight: bolder;
+}
+.tt_class_title{
+	font-size:12pt;
+	height: 3rem;
+}
+.tt_class_message{
+	font-size:8pt;
+	height: 1rem;
+}
+.tt_class_instructor{
+	font-size:10pt;
+	height: 1rem;
+}
+.tt_class_button{
+	font-size:12pt;
+	height: 20px;
+	text-align: right;
+	margin-top: -8px;
+	margin-right: -4px;
+}
+
+.active
+{
+	font-weight:bold;
+}
+
+.sticker:not(.active){
+	background-color: aliceblue;
+}
+
+
+.tt_class
+{
+	position: relative;
+	left: 1px;
+	top: 1px;
+}
+.hidden{
+	display: none;
+}
+.add_subscription_button{
+	width: 100%;
+	height: 15vh;
+	border: 1px solid;
+	border-radius: 16px;
+	font-size: 20px;
+}
+.signature{
+	margin: 30px 12px;
+}
+
+.signature.active{
+	text-decoration: underline;
+}
+.pointer{
+	cursor: pointer;
+}
+
+.class_grid.main .add_button{
+	display: none;
+}
+
+.class_grid:not(.main) .del_button{
+	display: none;
+}
+
+.bold{
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.content_center{
+	text-align: center;
+}
+
+
+
