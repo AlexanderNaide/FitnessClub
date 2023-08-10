@@ -73,7 +73,7 @@
 
             <div class="modal-footer d-flex justify-content-around">
                 <h5 class="non_sub hidden">Для записи на это занятие необходимо приобрести абонемент.</h5>
-                <button type="button" class="there_event btn btn-success hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Отменить запись</button>
+                <button type="button" class="there_event btn btn-success hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, '#modalClassInfo')">Отменить запись</button>
                 <button type="button" class="non_event btn btn-success hidden" ng-click="addEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Запись</button>
                 <button type="button" class="btn btn-secondary" ng-click="closeModal('#modalClassInfo')">Закрыть</button>
             </div>
