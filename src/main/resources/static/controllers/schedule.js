@@ -42,6 +42,19 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         }).then(function (response) {
             // console.log(response.data);
             $scope.CurrentEvent = response.data;
+            if(!$scope.userSubscriptionList.includes($scope.CurrentEvent.discipline.name)){
+                $('.non_sub').removeClass('hidden');
+                $('.there_event').addClass('hidden');
+                $('.non_event').addClass('hidden');
+            } else if ($scope.isSubscribe($scope.CurrentEvent.id)){
+                $('.there_event').removeClass('hidden');
+                $('.non_sub').addClass('hidden');
+                $('.non_event').addClass('hidden');
+            } else {
+                $('.non_event').removeClass('hidden');
+                $('.non_sub').addClass('hidden');
+                $('.there_event').addClass('hidden');
+            }
             $('#modalClassInfo').modal('toggle');
         }).catch(function (response) {
             alert(response.data.message);
@@ -57,15 +70,6 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
     };
 
     $scope.isMainClass = function (id){
-        // let added = false;
-
-        // for (const sub of $scope.subscriptionDtoList) {
-        //     if (sub.disciplineName === discipline){
-        //         added = true;
-        //         break;
-        //     }
-        // }
-        // return added ? "main" : null;
         return $scope.isSubscribe(id) ? "main" : null;
     };
 
@@ -82,12 +86,36 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         }
     };
 
+    $scope.addEventOnModalInfo = function (id, discipline, modal){
+        if(!$scope.userSubscriptionList.includes(discipline)){
+            alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
+        } else {
+            $http({
+                url: contextSchedulePath + "/subscribe/" + id,
+                method: 'POST'
+            }).then(function () {
+                $scope.loadUserEvents();
+                $scope.closeModal(modal);
+            });
+        }
+    };
+
     $scope.deleteEvent = function (id){
         $http({
             url: contextSchedulePath + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserEvents();
+        });
+    };
+
+    $scope.deleteEventOnModalInfo = function (id, modal){
+        $http({
+            url: contextSchedulePath + "/unsubscribe/" + id,
+            method: 'POST'
+        }).then(function () {
+            $scope.loadUserEvents();
+            $scope.closeModal(modal);
         });
     };
 

@@ -70,9 +70,11 @@ public class TestScheduleController {
         eventInfoResponse.setHall(hallInfoResponse);
         eventInfoResponse.setTrainer(trainerResponse);
         eventInfoResponse.setDiscipline(disciplineResponse);
+        eventInfoResponse.setId(classDto.getId());
         eventInfoResponse.setDate(classDto.getDay());
         eventInfoResponse.setStartTime(classDto.getTime());
         eventInfoResponse.setDuration("60 мин.");
+        eventInfoResponse.setComment(classDto.getMessage());
 
         return eventInfoResponse;
     }

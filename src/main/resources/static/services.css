@@ -132,5 +132,14 @@
 	display: none;
 }
 
+.bold{
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.content_center{
+	text-align: center;
+}
+
 
 
