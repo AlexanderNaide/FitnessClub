@@ -3,7 +3,7 @@ package ru.gb.testback.model;
 import lombok.Data;
 
 @Data
-public class ClassDto {
+public class ClassDto implements Event {
     private Long id;
     private String title;
     private String message;

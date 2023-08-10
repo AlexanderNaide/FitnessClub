@@ -1,15 +1,25 @@
-package ru.gb.testback.model;
+package ru.gb.testback.repositories;
 
-import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
+import ru.gb.testback.model.ClassDto;
+import ru.gb.testback.model.Event;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Service
-public class ScheduleService {
-    public List<ClassDto> getScheduleList() {
+@Repository
+public class SchedulesRepository {
+
+    private Map<Long, Event> scheduleRepository;
+    private Map<String, String> disciplineDescriptionRepository;
+
+    @PostConstruct
+    private void init(){
         List<ClassDto> list = new ArrayList<>();
-        list.add(new ClassDto(0L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Понедельник", "9:00", 1));
+        list.add(new ClassDto(0L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Понедельник", "09:00", 1));
         list.add(new ClassDto(1L, "ЙОГА_ЛАТЕС", "", "Пономарева Вика", "Понедельник", "10:00", 1));
         list.add(new ClassDto(2L, "BREAK_DANCE", "", "Ефимов Василий", "Понедельник", "16:00", 1));
         list.add(new ClassDto(3L, "BREAK_DANCE", "", "Ефимов Василий", "Понедельник", "17:00", 1));
@@ -34,7 +44,7 @@ public class ScheduleService {
         list.add(new ClassDto(21L, "ЗДОРОВАЯ СПИНА", "(по записи)", "Корчуганова Соня", "Вторник", "20:00", 2));
         list.add(new ClassDto(22L, "ЙОГА", "", "Ежикова Елена", "Вторник", "20:00", 3));
 
-        list.add(new ClassDto(23L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Среда", "9:00", 1));
+        list.add(new ClassDto(23L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Среда", "09:00", 1));
         list.add(new ClassDto(24L, "АКТИВ_БОДИ", "", "Пономарева Вика", "Среда", "10:00", 1));
         list.add(new ClassDto(25L, "BREAK_DANCE", "", "Ефимов Василий", "Среда", "16:00", 1));
         list.add(new ClassDto(26L, "BREAK_DANCE", "", "Ефимов Василий", "Среда", "17:00", 1));
@@ -61,7 +71,7 @@ public class ScheduleService {
         list.add(new ClassDto(46L, "ЙОГА", "", "Ежикова Елена", "Четверг", "20:00", 3));
         list.add(new ClassDto(47L, "СТЕП-АЭРОБИКА", "", "Карпачева Вероника", "Четверг", "20:00", 4));
 
-        list.add(new ClassDto(48L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Пятница", "9:00", 1));
+        list.add(new ClassDto(48L, "СИЛОВОЙ ТРЕНИНГ", "", "Соколова Алена", "Пятница", "09:00", 1));
         list.add(new ClassDto(49L, "ЙОГА_ЛАТЕС", "", "Пономарева Вика", "Пятница", "10:00", 1));
         list.add(new ClassDto(50L, "BREAK_DANCE", "", "Ефимов Василий", "Пятница", "16:00", 1));
         list.add(new ClassDto(51L, "BREAK_DANCE", "", "Ефимов Василий", "Пятница", "17:00", 1));
@@ -89,6 +99,32 @@ public class ScheduleService {
 //        list.add(new ClassDto(72L, "ТАНЦЕВАЛЬНЫЙ ЗАЛ", "", "", "Воскресенье", "20:00", 2));
 //        list.add(new ClassDto(73L, "МАЛЫЙ ЗАЛ", "(2 этаж)", "", "Воскресенье", "20:00", 4));
 
-        return list;
+        scheduleRepository = new HashMap<>();
+        list.forEach(e -> scheduleRepository.put(e.getId(), e));
+
+        disciplineDescriptionRepository = new HashMap<>();
+        disciplineDescriptionRepository.put("СИЛОВОЙ ТРЕНИНГ", "Силовая тренировка или тренировка сопротивления предполагает выполнение физических упражнений, направленных на повышение силы и выносливости. Это часто связано с поднятием тяжестей. Он также может включать в себя различные методы обучения, такие как гимнастика, изометрия и плиометрия.");
+        disciplineDescriptionRepository.put("ЙОГА_ЛАТЕС", "Йогалатес — это направление фитнеса, совмещающее в себе две крупнейшие методики: Йога и система Пилатес. Благодаря «симбиозу» двух практик, за одну тренировку Вы обретаете равновесие, гармонию, умиротворение при помощи Йоги. А силу, подтянутость, тонус и заряд энергией — дают Вам упражнения по системе Пилатес.");
+        disciplineDescriptionRepository.put("BREAK_DANCE", "Брейк-данс — это танец, уходящий своими истоками в уличную культуру хип-хопа. Зародился он в начале 70-х годов в Нью-Йорке. Сперва это были незамысловатые движения под «брейкс» — ломаную музыку диджеев тех лет. Поэтому его, собственно, и назвали «break» — ломать, ломаться. Изначально он назывался бибоинг — от слова b-boy (breakboy).\n" +
+                "Сейчас брейк-данс принято называть брейкингом.");
+        disciplineDescriptionRepository.put("ЗДОРОВАЯ СПИНА", "Здоровая спина (Fine Spine) – одна из самых мягких разновидностей фитнеса, направленных на проработку мышц, удерживающих позвоночник в правильном положении. Упражнения предназначены для безопасного растягивания мышц и связок: они улучшат и восстановят подвижность позвоночника, снимут излишнее напряжение и расслабят малоподвижные участки спины.");
+        disciplineDescriptionRepository.put("СТРЕТЧИНГ", "Стретчинг – это комплекс физических упражнений, точнее поз, для растягивания отдельных частей тела, направленных на улучшение гибкости и развития подвижности в суставах, при котором чередуются напряжение и расслабление различных групп мышц. Определенным образом организуя мышечную деятельность, стретчинг повышает двигательную активность, улучшает подвижность суставов, быстро восстанавливает способность двигаться при травмах, заболеваниях.");
+        disciplineDescriptionRepository.put("ФУНКЦИОН. ПИЛАТЕС", "Функциональный Пилатес — глубокий и объемный курс, направленный на заполнение пробелов в классическом курсе пилатеса: почти полное отсутствие вращений и скручивания позвоночника. Этот семинар предоставляет множество новых упражнений, основанных на методе Пилатес, но в более широкой форме.");
+        disciplineDescriptionRepository.put("ЛФК ФИТНЕСС", "Лечебная гимнастика");
+        disciplineDescriptionRepository.put("FT ПЕТЛИ TRX", "Петли TRX — это инновационный тренажер, который состоит из прочной ленты с двумя лямками, круглыми ручками для рук и петлями для ног. Данный тренажер компактен, что позволяет его использовать дома, в тренажерном зале и на уличной спортивной площадке. Его главная особенность — это работа с собственным весом, которая позволяет воздействовать практически на все мышцы тела за счет регулируемой нагрузки (длины лямок и угла их наклона).");
+        disciplineDescriptionRepository.put("ТРАЙБЛ", "Трайбл — современный стиль танца, основанный на сочетании элементов фольклорных танцев Северной Африки, Ближнего Востока, Индии и фламенко.");
+        disciplineDescriptionRepository.put("КАЛЛАНЕТИКА", "Калланетика — это комплекс гимнастических упражнений, разработанный американкой Кэллан Пинкни. Это система комплексных статических упражнений, направленных на сокращение и растяжение мышц.");
+    }
+
+    public Map<Long, Event> findAll(){
+        return scheduleRepository;
+    }
+
+    public Event findById(Long id){
+        return scheduleRepository.get(id);
+    }
+
+    public String findDescriptionByTitle(String title){
+        return disciplineDescriptionRepository.get(title);
     }
 }
