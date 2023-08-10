@@ -1,0 +1,37 @@
+
+<div class="timetable_filtering">
+    <div class="button-group row justify-content-md-center" data-filter-group="dayOfWeek">
+        <div class="sticker all item_filter_btn active" data-filter="">
+            <div class="tt_class_title">ВСЕ ЗАЛЫ</div>
+        </div>
+        <div class="sticker item_filter_btn fitness active" data-filter=".fitness">
+            <div class="tt_class_title">ФИТНЕС ЗАЛ</div>
+        </div>
+        <div class="sticker item_filter_btn green active" data-filter=".green">
+            <div class="tt_class_title">ЗЕЛЕНЫЙ ЗАЛ<br>(2 этаж)</div>
+        </div>
+        <div class="sticker item_filter_btn dance active" data-filter=".dance">
+            <div class="tt_class_title">ТАНЦЕВАЛЬНЫЙ ЗАЛ</div>
+        </div>
+        <div class="sticker item_filter_btn little active" data-filter=".little">
+            <div class="tt_class_title">МАЛЫЙ ЗАЛ<br>(2 этаж)</div>
+        </div>
+    </div>
+</div>
+<table class="schedule_table">
+    <tr class="head_string">
+        <td></td>
+        <td ng-repeat="day in dayList">{{day}}</td>
+    </tr>
+    <tr class="body_string" ng-repeat="time in timeGrid">
+        <td class="time_grid">{{time}}</td>
+        <td class="class_col grid" ng-repeat="day in dayList">
+            <div class="class_grid {{class.place}}" ng-repeat="class in scheduleDtoList" ng-if="class.day == day && class.time == time">
+                <div class="tt_class_title">{{class.title}}</div>
+                <div class="tt_class_message">{{class.message}}</div>
+                <div class="tt_class_instructor">{{class.trainer}}</div>
+            </div>
+        </td>
+    </tr>
+</table>
+

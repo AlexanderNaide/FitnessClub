@@ -1,5 +1,6 @@
 package ru.gb.testback;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.testback.model.*;
 
@@ -10,11 +11,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class TestController {
+
+    private final ScheduleService scheduleService;
 
     @PostMapping("/auth-service/auth")
     public AuthResponse token(@RequestBody AuthRequest request){
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MDk1ODE4MSwiaWF0IjoxNjg5NzQ4NTgxLCJhdXRob3JpdHkiOlsidXNlciJdfQ.dq7JV4_77obArhztZX3W4rNhH_ffyNRmWuP9iekDE7Y";
+        String token;
+
+        if (request.getKeypass().equals("admin")){
+            token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MjA4ODYyNiwiaWF0IjoxNjkwODc5MDI2LCJhdXRob3JpdHkiOlsiYWRtaW4iXX0.ss8i0YmMUqWNx0uwlcilzZ2TFlD3MPVDwaCTfZ-zCEs";
+        } else {
+            token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTY5MjQ0MTUxMSwiaWF0IjoxNjkxMjMxOTExLCJhdXRob3JpdHkiOlsidXNlciJdfQ.47AgHIaOTT94fkteOVy3e7XtXjxPO3FSR6N_hWC_zW4";
+        }
         return new AuthResponse(token);
     }
 
@@ -49,5 +59,9 @@ public class TestController {
     }
 
 
+    @GetMapping("/user-service/schedule")
+    public List<ClassDto> getSchedule(){
+        return scheduleService.getScheduleList();
+    }
 
 }

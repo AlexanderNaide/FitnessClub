@@ -8,6 +8,14 @@
 
     function config($routeProvider){
         $routeProvider
+            .when('/admin', {
+                templateUrl: 'pages/schedule.html',
+                controller: 'scheduleController'
+            })
+            .when('/schedule', {
+                templateUrl: 'pages/schedule.html',
+                controller: 'scheduleController'
+            })
             .when('/services', {
                 templateUrl: 'pages/services.html',
                 controller: 'servicesController'
@@ -38,6 +46,11 @@
                     $location.path('/')
                 } else {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.fitnessClubUser.token;
+                    console.log('Role: ' + payload.authority);
+                    if (payload.authority == "admin"){
+                        console.log("It's admin");
+                        $location.path('/admin');
+                    }
                 }
             } catch (e) {
             }
@@ -56,7 +69,10 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
     }
 
     $scope.ifUserLoggedIn = function (){
-        return !!$localStorage.fitnessClubUser;
+        return !!$localStorage.fitnessClubUser && $localStorage.fitnessClubUser.role != "admin";
+    }
+    $scope.ifAdminLoggedIn = function (){
+        return !!$localStorage.fitnessClubUser && $localStorage.fitnessClubUser.role == "admin";
     }
 
 });
