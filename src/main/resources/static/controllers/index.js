@@ -90,6 +90,8 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
         });
     };
 
+
+
     $scope.registrations = function () {
         $http.post(contextPathAuth + '/reg', $scope.reg)
             .then(function (response) {
