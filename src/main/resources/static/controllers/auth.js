@@ -1,5 +1,5 @@
 angular.module('fitnessClub').controller('authController', function ($scope, $http, $location, $localStorage) {
-    const contextPathAuth = 'http://localhost:8081/three-oceans.fitness/api/v1/auth-service';
+    const contextPathAuth = 'http://localhost:5555/three-oceans.fitness/api/v1/auth-service';
 
     $scope.authentications = function () {
         $http.post(contextPathAuth + '/auth', $scope.auth)
