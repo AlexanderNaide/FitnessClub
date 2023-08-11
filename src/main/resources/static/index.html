@@ -58,11 +58,11 @@
                                 <a href="#!/schedule" class="nav-link smoothScroll">Расписание клуба</a>
                             </li>
 
-                            <li class="nav-item" ng-show="ifUserLoggedIn()">
+                            <li class="nav-item log_out_button hidden">
                                 <a href="#" ng-click="clearUser()" class="nav-link smoothScroll">Выйти</a>
                             </li>
 
-                            <li class="nav-item" ng-show="!ifUserLoggedIn()">
+                            <li class="nav-item log_in_button">
                                 <a href="#" ng-click="getAuthWindow()" class="nav-link smoothScroll">Войти</a>
                             </li>
                         </ul>
@@ -141,7 +141,7 @@
                         <div class="modal-footer d-flex justify-content-around">
                             <button class="btn btn-primary authorizationWindow" ng-click="getRegistrations()" type="button">Регистрация</button>
                             <button class="btn btn-primary registrationWindow hidden" ng-click="getAuthorizations()" type="button">Авторизация</button>
-                            <button class="btn btn-success authorizationWindow" ng-click="authentications() & closeModal('#modalAuth')">Войти</button>
+                            <button class="btn btn-success authorizationWindow" ng-click="authentications() && closeModal('#modalAuth')">Войти</button>
                             <button class="btn btn-success registrationWindow hidden" ng-click="registrations() " type="button">Зарегистрироваться</button>
                         </div>
                     </div>

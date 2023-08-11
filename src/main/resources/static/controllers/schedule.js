@@ -1,4 +1,4 @@
-angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
+angular.module('fitnessClub').controller('scheduleController', function ($rootScope, $scope, $http) {
     const contextSchedulePath = 'http://localhost:5555/schedule-service/api/v1/events';
     const contextPathSubscriptionService = 'http://localhost:5555/subscriptions-service/api/v1/subscriptions';
 
@@ -11,6 +11,8 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             $scope.scheduleDto = response.data;
         });
     };
+
+    $rootScope.$emit('test');
 
     $scope.loadUserSubscriptions = function () {
         $http({

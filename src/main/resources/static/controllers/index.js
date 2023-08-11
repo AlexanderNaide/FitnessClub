@@ -51,9 +51,12 @@
                 } else {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.fitnessClubUser.token;
                     // console.log('Role: ' + payload.authority);
-                    if (payload.authority == "admin"){
-                        // console.log("It's admin");
+                    if (payload.authority === String("admin")){
                         $location.path('/admin');
+                    } else {
+                        $('.log_in_button').addClass('hidden');
+                        $('.log_out_button').removeClass('hidden');
+                        $location.path('/');
                     }
                 }
             } catch (e) {
@@ -72,17 +75,21 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
             .then(function (response) {
                 if(response.data.token){
                     // console.log("Токен получен");
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    // $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     let jwt = response.data.token;
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
                     $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
+                    $scope.setAuthority(payload, response.data.token);
                     // console.log('Role: ' + payload.authority);
-                    if (payload.authority == "admin"){
+/*                    if (payload.authority == "admin"){
                         // console.log("It's admin");
                         $location.path('/admin');
                     } else {
+                        $('.log_in_button').addClass('hidden');
+                        $('.log_out_button').removeClass('hidden');
                         $location.path('/');
-                    }
+
+                    }*/
                 }
             }).catch(function (response) {
             // console.log(response.data.message)
@@ -90,15 +97,35 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
         });
     };
 
+    $scope.setAuthority = function (payload, token) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+        if (payload.authority === String("admin")){
+            $location.path('/admin');
+        } else {
+            $('.log_in_button').addClass('hidden');
+            $('.log_out_button').removeClass('hidden');
+            $location.path('/');
+        }
+    };
+
+    $rootScope.$on('test', function () {
+        console.log("test");
+    });
+
     $scope.registrations = function () {
         $http.post(contextPathAuth + '/reg', $scope.reg)
             .then(function (response) {
                 if(response.data.token){
                     console.log("Токен получен")
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                    $localStorage.fitnessClubUser = {username: $scope.auth.keypass, token: response.data.token};
+                    let jwt = response.data.token;
+                    let payload = JSON.parse(atob(jwt.split('.')[1]));
+                    $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
+                    $scope.setAuthority(payload, response.data.token);
 
-                    $location.path('/');
+                    // $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    // $localStorage.fitnessClubUser = {username: $scope.auth.keypass, token: response.data.token};
+                    // $scope.setAuthority(payload, response.data.token);
+                    // $location.path('/');
                 }
             }).catch(function (response) {
             // console.log(response.data.message)
