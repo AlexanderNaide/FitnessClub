@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/schedule-service/api/v1/events")
+@RequestMapping("/schedule/api/v1/events")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestScheduleController {
@@ -29,10 +29,11 @@ public class TestScheduleController {
         return scheduleService.getSchedule();
     }
 
-    @GetMapping("/subscription")
+    // Метод для отправки списка абонементов (на фронте пока без него)
+/*    @GetMapping("/subscription")
     public List<String> getUserSubscriptions(){
         return scheduleService.getUserSubscriptionList().stream().map(SubscriptionDto::getDisciplineName).toList();
-    }
+    }*/
 
     @GetMapping("/personal")
     public List<Long> getUserEvents(){

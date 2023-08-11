@@ -10,14 +10,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/subscriptions-service/api/v1/subscriptions")
+@RequestMapping("/accounts/api/v1/clients/subscriptions")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestSubscriptionController {
 
     private final SubscriptionsService subscriptionsService;
 
-    @GetMapping()
+    @GetMapping("/info")
     public List<SubscriptionDto> getUserSubscriptionList(){
         return subscriptionsService.getUserSubscriptionList();
     }
@@ -27,19 +27,21 @@ public class TestSubscriptionController {
         return subscriptionsService.getAllSubscriptionList();
     }
 
-    @PostMapping("/subscribe/{id}")
+    @PostMapping("/buy/{id}")
     public void addSubscriptionForUser(@PathVariable Long id){
         subscriptionsService.addSubscriptionForUser(id);
     }
 
-    @PostMapping("/unsubscribe/{id}")
+    // Запрос на удаление абонемента - пока не нужен
+/*    @PostMapping("/unsubscribe/{id}")
     public void deleteSubscriptionForUser(@PathVariable Long id){
         subscriptionsService.deleteSubscriptionForUser(id);
-    }
+    }*/
 
-    @GetMapping("/{id}")
+    // Запрос подробной информации об абонементе.
+/*    @GetMapping("/{id}")
     public SubscriptionResponse getSubscriptionById(@PathVariable Long id){
         return subscriptionsService.getSubscription(id);
-    }
+    }*/
 
 }
