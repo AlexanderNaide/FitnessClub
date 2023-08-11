@@ -11,14 +11,18 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/aos.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="services.css">
+        <link rel="stylesheet" type="text/css" href="css/services.css">
+        <link rel="stylesheet" href="css/tooplate-gymso-style.css">
         <script src="controllers/index.js"></script>
         <script src="controllers/auth.js"></script>
         <script src="controllers/home.js"></script>
+        <script src="controllers/user_info.js"></script>
         <script src="controllers/services.js"></script>
         <script src="controllers/schedule.js"></script>
 
@@ -27,70 +31,43 @@
 
     <body>
         <div class="container" ng-controller="indexController">
-            <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand link-dark" href="#!/" style="font-size: xx-large">Fitness Club</a>
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container">
+                    <a class="navbar-brand link-dark" href="#!/" style="font-size: xx-large">Just<span style="color: #f13a11">4</span>feat</a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="font-size: x-large">
-                        <div class="navbar-nav" ng-show="ifUserLoggedIn()" content="inline-block" style="margin-left: auto; grid-column-gap: 16px">
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-lg-auto">
+                            <li class="nav-item">
+                                <a href="#!/home" class="nav-link smoothScroll">На главную</a>
+                            </li>
 
-                            <a class="nav-link" href="#!/user" >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 18">
-                                    <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
-                                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
-                                </svg>
-                                Личные данные
-                            </a>
+                            <li class="nav-item">
+                                <a href="#!/info" class="nav-link smoothScroll">Личные данные</a>
+                            </li>
 
-                            <a class="nav-link" href="#!/services">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box2" viewBox="0 0 16 18">
-                                    <path d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3L2.95.4ZM7.5 1H3.75L1.5 4h6V1Zm1 0v3h6l-2.25-3H8.5ZM15 5H1v10h14V5Z"/>
-                                </svg>
-                                Мои занятия
-                            </a>
+                            <li class="nav-item">
+                                <a href="#!/services" class="nav-link smoothScroll">Мои занятия</a>
+                            </li>
 
-                            <a class="nav-link" href="#!/schedule">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-month" viewBox="0 0 16 16">
-                                    <path d="M2.56 11.332 3.1 9.73h1.984l.54 1.602h.718L4.444 6h-.696L1.85 11.332h.71zm1.544-4.527L4.9 9.18H3.284l.8-2.375h.02zm5.746.422h-.676V9.77c0 .652-.414 1.023-1.004 1.023-.539 0-.98-.246-.98-1.012V7.227h-.676v2.746c0 .941.606 1.425 1.453 1.425.656 0 1.043-.28 1.188-.605h.027v.539h.668V7.227zm2.258 5.046c-.563 0-.91-.304-.985-.636h-.687c.094.683.625 1.199 1.668 1.199.93 0 1.746-.527 1.746-1.578V7.227h-.649v.578h-.019c-.191-.348-.637-.64-1.195-.64-.965 0-1.64.679-1.64 1.886v.34c0 1.23.683 1.902 1.64 1.902.558 0 1.008-.293 1.172-.648h.02v.605c0 .645-.423 1.023-1.071 1.023zm.008-4.53c.648 0 1.062.527 1.062 1.359v.253c0 .848-.39 1.364-1.062 1.364-.692 0-1.098-.512-1.098-1.364v-.253c0-.868.406-1.36 1.098-1.36z"/>
-                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                                </svg>
-                                Расписание клуба
-                            </a>
+                            <li class="nav-item">
+                                <a href="#!/schedule" class="nav-link smoothScroll">Расписание клуба</a>
+                            </li>
 
-                            <a class="nav-link" ng-click="clearUser()" href="#!/auth">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 18">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                                Выйти
-                            </a>
+                            <li class="nav-item" ng-show="ifUserLoggedIn()">
+                                <a href="#" ng-click="clearUser()" class="nav-link smoothScroll">Выйти</a>
+                            </li>
 
-                        </div>
-                        <div class="navbar-nav" ng-show="ifAdminLoggedIn()" content="inline-block" style="margin-left: auto; grid-column-gap: 16px">
-
-                            <a class="nav-link" href="#!/schedule">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-month" viewBox="0 0 16 16">
-                                    <path d="M2.56 11.332 3.1 9.73h1.984l.54 1.602h.718L4.444 6h-.696L1.85 11.332h.71zm1.544-4.527L4.9 9.18H3.284l.8-2.375h.02zm5.746.422h-.676V9.77c0 .652-.414 1.023-1.004 1.023-.539 0-.98-.246-.98-1.012V7.227h-.676v2.746c0 .941.606 1.425 1.453 1.425.656 0 1.043-.28 1.188-.605h.027v.539h.668V7.227zm2.258 5.046c-.563 0-.91-.304-.985-.636h-.687c.094.683.625 1.199 1.668 1.199.93 0 1.746-.527 1.746-1.578V7.227h-.649v.578h-.019c-.191-.348-.637-.64-1.195-.64-.965 0-1.64.679-1.64 1.886v.34c0 1.23.683 1.902 1.64 1.902.558 0 1.008-.293 1.172-.648h.02v.605c0 .645-.423 1.023-1.071 1.023zm.008-4.53c.648 0 1.062.527 1.062 1.359v.253c0 .848-.39 1.364-1.062 1.364-.692 0-1.098-.512-1.098-1.364v-.253c0-.868.406-1.36 1.098-1.36z"/>
-                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                                </svg>
-                                Расписание клуба
-                            </a>
-
-                            <!--                            <a class="nav-link" ng-click="clearUser()" href="#!/">-->
-                            <a class="nav-link" ng-click="clearUser()" href="#!/auth">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 18">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                                Выйти
-                            </a>
-
-                        </div>
+                            <li class="nav-item" ng-show="!ifUserLoggedIn()">
+                                <a href="#" ng-click="getAuthWindow()" class="nav-link smoothScroll">Войти</a>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
             </nav>
 
@@ -100,6 +77,80 @@
 
             <ng-view></ng-view>
 
+
+
+            <div class="modal fade" id="modalAuth" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-center">
+                            <h5 class="modal-title">{{modalStatus}}</h5>
+                        </div>
+
+                        <div class="modal-body authorizationWindow">
+                            <div class="form-group mb-3">
+                                <label for="logUsername">Логин</label>
+                                <input class="form-control" type="text" ng-model="auth.username" id="logUsername">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="logPassword">Пароль</label>
+                                <input class="form-control" type="text" ng-model="auth.password" id="logPassword">
+                            </div>
+                        </div>
+
+                        <div class="modal-body registrationWindow hidden">
+                            <div>
+                                <div class="form-group mb-3">
+                                    <label for="regUsername">Логин</label>
+                                    <input class="form-control" type="text" ng-model="reg.username" id="regUsername" placeholder="login">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group mb-3">
+                                        <label for="regPassword">Пароль</label>
+                                        <input class="form-control" type="password" ng-model="reg.password" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="password">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-3">
+                                        <label for="confirmPassword">Подтверждение пароля</label>
+                                        <input class="form-control" type="password" ng-model="reg.confirmPassword" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="confirm password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group mb-3">
+                                    <label for="realName">Полное имя</label>
+                                    <input class="form-control" type="text" ng-model="auth.realName" id="realName">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group mb-3">
+                                    <label for="phone">Телефон</label>
+                                    <input id="phone" class="form-control" type="text" ng-model="reg.phone" ng-change="phoneMatching()" placeholder="+7 900 000 0000">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group mb-3">
+                                    <label for="email">Электронная почта</label>
+                                    <input id="email" class="form-control" type="text" ng-model="reg.email" ng-change="emailMatching()" placeholder="user@mail.ru">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer d-flex justify-content-around">
+                            <button class="btn btn-primary authorizationWindow" ng-click="getRegistrations()" type="button">Регистрация</button>
+                            <button class="btn btn-primary registrationWindow hidden" ng-click="getAuthorizations()" type="button">Авторизация</button>
+                            <button class="btn btn-success authorizationWindow" ng-click="authentications() & closeModal('#modalAuth')">Войти</button>
+                            <button class="btn btn-success registrationWindow hidden" ng-click="registrations() " type="button">Зарегистрироваться</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </body>
+
+
 </html>
+
