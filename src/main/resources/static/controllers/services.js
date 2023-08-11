@@ -30,7 +30,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         });
     };
 
-    // Запрос на удаление абонемента - пока не нужен
+    // Р—Р°РїСЂРѕСЃ РЅР° СѓРґР°Р»РµРЅРёРµ Р°Р±РѕРЅРµРјРµРЅС‚Р° - РїРѕРєР° РЅРµ РЅСѓР¶РµРЅ
 /*    $scope.deleteSubscription = function (id){
         $http({
             url: contextPathSubscriptionService + "/unsubscribe/" + id,
@@ -41,7 +41,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
     };*/
 
 
-    // Запрос подробной информации об абонементе.
+    // Р—Р°РїСЂРѕСЃ РїРѕРґСЂРѕР±РЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РѕР± Р°Р±РѕРЅРµРјРµРЅС‚Рµ.
 /*    $scope.getTicketById = function (id){
         $http({
             url: contextPathSubscriptionService + "/" + id,
