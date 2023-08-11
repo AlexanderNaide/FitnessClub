@@ -1,5 +1,5 @@
 angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8081/three-oceans.fitness/api/v1/user-service';
+    const contextPath = 'http://localhost:5555/three-oceans.fitness/api/v1/user-service';
 
     $scope.loadInformation = function () {
         $http({

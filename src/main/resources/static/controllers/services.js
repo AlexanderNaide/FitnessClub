@@ -1,5 +1,5 @@
 angular.module('fitnessClub').controller('servicesController', function ($scope, $http) {
-    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
+    const contextPathSubscriptionService = 'http://localhost:5555/subscriptions-service/api/v1/subscriptions';
 
     $scope.loadUserSubscriptions = function () {
         $http({
