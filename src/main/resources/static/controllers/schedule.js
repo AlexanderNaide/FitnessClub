@@ -1,5 +1,6 @@
 angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
     const contextSchedulePath = 'http://localhost:8081/schedule-service/api/v1/events';
+    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
 
     $scope.loadSchedule = function () {
         $http({
@@ -13,13 +14,16 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextSchedulePath + '/subscription',
+            url: contextPathSubscriptionService,
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
 
-            // Лист Строк названий дисциплин
-            $scope.userSubscriptionList = response.data;
+            // Запрашивается список абонементов и пересыпается в список строк
+            $scope.userSubscriptionList = [];
+            for (const dto of response.data) {
+                $scope.userSubscriptionList.push(dto.disciplineName);
+            }
         });
     };
 
