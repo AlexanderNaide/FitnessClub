@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/accounts/api/v1/clients/subscriptions")
+@RequestMapping("/subscriptions/api/v1/clients/subscriptions")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestSubscriptionController {
