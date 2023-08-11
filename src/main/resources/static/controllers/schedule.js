@@ -1,6 +1,6 @@
 angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
-    const contextSchedulePath = 'http://localhost:8081/schedule-service/api/v1/events';
-    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
+    const contextSchedulePath = 'http://localhost:5555/schedule-service/api/v1/events';
+    const contextPathSubscriptionService = 'http://localhost:5555/subscriptions-service/api/v1/subscriptions';
 
     $scope.loadSchedule = function () {
         $http({
