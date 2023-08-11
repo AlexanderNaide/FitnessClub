@@ -35,6 +35,7 @@
 	text-align: center;
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
+	z-index: 1;
 }
 .sticker{
 	height: 4rem;
@@ -83,10 +84,12 @@
 	font-size:12pt;
 	height: 20px;
 	text-align: right;
-	margin-top: -8px;
-	margin-right: -4px;
+	margin-top: -10px;
+	margin-right: 10px;
 }
-
+.place{
+	flex-grow: 1;
+}
 .active
 {
 	font-weight:bold;
