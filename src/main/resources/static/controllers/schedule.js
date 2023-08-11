@@ -1,10 +1,10 @@
 angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
-    const contextSchedulePath = 'http://localhost:5555/schedule/api/v1/events';
-    const contextPathSubscriptionService = 'http://localhost:5555/subscriptions/api/v1/clients/subscriptions';
+    const contextPathScheduleService = 'http://localhost:5555/schedule/api/v1/events';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
     $scope.loadSchedule = function () {
         $http({
-            url: contextSchedulePath + '/general',
+            url: contextPathScheduleService + '/general',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
@@ -14,7 +14,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextPathSubscriptionService + '/info',
+            url: contextPathAccountService + '/subscriptions/info',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
@@ -29,7 +29,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.loadUserEvents = function () {
         $http({
-            url: contextSchedulePath + '/personal',
+            url: contextPathScheduleService + '/personal',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
@@ -41,7 +41,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.getEventInformation = function (id) {
         $http({
-            url: contextSchedulePath + "/" + id + "/info",
+            url: contextPathScheduleService + "/" + id + "/info",
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
@@ -82,7 +82,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
         } else {
             $http({
-                url: contextSchedulePath + "/subscribe/" + id,
+                url: contextPathScheduleService + "/subscribe/" + id,
                 method: 'POST'
             }).then(function () {
                 $scope.loadUserEvents();
@@ -95,7 +95,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
         } else {
             $http({
-                url: contextSchedulePath + "/subscribe/" + id,
+                url: contextPathScheduleService + "/subscribe/" + id,
                 method: 'POST'
             }).then(function () {
                 $scope.loadUserEvents();
@@ -106,7 +106,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.deleteEvent = function (id){
         $http({
-            url: contextSchedulePath + "/unsubscribe/" + id,
+            url: contextPathScheduleService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserEvents();
@@ -115,7 +115,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
     $scope.deleteEventOnModalInfo = function (id, modal){
         $http({
-            url: contextSchedulePath + "/unsubscribe/" + id,
+            url: contextPathScheduleService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserEvents();

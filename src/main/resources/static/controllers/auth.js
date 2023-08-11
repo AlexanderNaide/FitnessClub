@@ -1,8 +1,8 @@
 angular.module('fitnessClub').controller('authController', function ($scope, $http, $location, $localStorage) {
-    const contextPathAuth = 'http://localhost:5555/auth/api/v1';
+    const contextPathAuthService = 'http://localhost:5555/auth/api/v1';
 
     $scope.authentications = function () {
-        $http.post(contextPathAuth + '/auth', $scope.auth)
+        $http.post(contextPathAuthService + '/auth', $scope.auth)
             .then(function (response) {
                 if(response.data.token){
                     console.log("Токен получен");
@@ -25,7 +25,7 @@ angular.module('fitnessClub').controller('authController', function ($scope, $ht
     };
 
     $scope.registrations = function () {
-        $http.post(contextPathAuth + '/registration', $scope.reg)
+        $http.post(contextPathAuthService + '/registration', $scope.reg)
             .then(function (response) {
                 if(response.data.token){
                     console.log("Токен получен")

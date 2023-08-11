@@ -10,17 +10,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/subscriptions/api/v1/clients/subscriptions")
+@RequestMapping("/subscriptions/api/v1/subscriptions")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestSubscriptionController {
 
     private final SubscriptionsService subscriptionsService;
 
-    @GetMapping("/info")
-    public List<SubscriptionDto> getUserSubscriptionList(){
-        return subscriptionsService.getUserSubscriptionList();
-    }
 
     @GetMapping("/get-all")
     public List<SubscriptionResponse> getAllSubscriptions(){
