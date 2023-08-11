@@ -1,9 +1,9 @@
 angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
-    const contextPath = 'http://localhost:5555/accounts/api/v1/clients/accounts';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients/accounts';
 
     $scope.loadInformation = function () {
         $http({
-            url: contextPath + '/info',
+            url: contextPathAccountService + '/info',
             method: 'GET'
         }).then(function (response) {
             console.log(response.data);
@@ -24,7 +24,7 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         };
         clearClass();
         $http({
-            url: contextPath + '/info/update',
+            url: contextPathAccountService + '/info/update',
             method: 'POST',
             data: setUserInformation
         }).then(function (response) {
