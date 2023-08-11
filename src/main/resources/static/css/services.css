@@ -35,16 +35,22 @@
 	text-align: center;
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
+	z-index: 1;
 }
 .sticker{
 	height: 4rem;
 	width: 9vw;
 	border-radius: 10px;
-	margin: 6px;
+	margin-top: -10px;
+	margin-right: 10px;
 	display:grid;
 	text-align: center;
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
+}
+
+.place{
+	flex-grow: 1;
 }
 
 .collDay{
