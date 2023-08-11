@@ -9,14 +9,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/three-oceans.fitness/api/v1")
+@RequestMapping()
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestAccountController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping("/auth-service/auth")
+    @PostMapping("/auth/api/v1/auth")
     public AuthResponse token(@RequestBody AuthRequest request){
         String token;
 
@@ -28,7 +28,7 @@ public class TestAccountController {
         return new AuthResponse(token);
     }
 
-    @PostMapping("/auth-service/reg")
+    @PostMapping("/auth/api/v1/registration")
     public AuthResponse reg(@RequestBody RegRequest request){
         // это для наглядности
         System.out.println("\nПришло:");
@@ -46,12 +46,12 @@ public class TestAccountController {
         return token(authRequest);
     }
 
-    @GetMapping("/user-service/info")
+    @GetMapping("/accounts/api/v1/clients/accounts/info")
     public UserDto info(){
         return new UserDto();
     }
 
-    @PostMapping("/user-service/save")
+    @PostMapping("/accounts/api/v1/clients/accounts/info/update")
     public void saveUser(@RequestBody UserDto userDto){
         System.out.println("\nПришло:");
         System.out.println(userDto.getUsername());
@@ -61,20 +61,20 @@ public class TestAccountController {
         System.out.println(userDto.getPassword());
     }
 
-    @GetMapping("/user-service/subscriptions")
+/*    @GetMapping("/user-service/subscriptions")
     public List<SubscriptionDto> tickets(){
         return List.of(new SubscriptionDto(), new SubscriptionDto());
-    }
+    }*/
 
-    @GetMapping("/user-service/subscriptions/{id}")
+/*    @GetMapping("/user-service/subscriptions/{id}")
     public void getOrderById(@PathVariable Long id){
         System.out.println(id);
-    }
+    }*/
 
 
-    @GetMapping("/user-service/schedule")
+/*    @GetMapping("/user-service/schedule")
     public List<Event> getSchedule(){
         return scheduleService.getScheduleList();
-    }
+    }*/
 
 }
