@@ -1,5 +1,5 @@
 angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8081/three-oceans.fitness/api/v1/user-service';
+    const contextPath = 'http://localhost:5555/accounts/api/v1/clients/accounts';
 
     $scope.loadInformation = function () {
         $http({
@@ -24,7 +24,7 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         };
         clearClass();
         $http({
-            url: contextPath + '/save',
+            url: contextPath + '/info/update',
             method: 'POST',
             data: setUserInformation
         }).then(function (response) {

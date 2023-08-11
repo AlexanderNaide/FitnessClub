@@ -1,9 +1,9 @@
 angular.module('fitnessClub').controller('servicesController', function ($scope, $http) {
-    const contextPathSubscriptionService = 'http://localhost:8081/subscriptions-service/api/v1/subscriptions';
+    const contextPathSubscriptionService = 'http://localhost:5555/accounts/api/v1/clients/subscriptions';
 
     $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextPathSubscriptionService,
+            url: contextPathSubscriptionService + '/info',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
@@ -23,23 +23,26 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
 
     $scope.buySubscription = function (id){
         $http({
-            url: contextPathSubscriptionService + "/subscribe/" + id,
+            url: contextPathSubscriptionService + "/buy/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserSubscriptions();
         });
     };
 
-    $scope.deleteSubscription = function (id){
+    // Запрос на удаление абонемента - пока не нужен
+/*    $scope.deleteSubscription = function (id){
         $http({
             url: contextPathSubscriptionService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserSubscriptions();
         });
-    };
+    };*/
 
-    $scope.getTicketById = function (id){
+
+    // Запрос подробной информации об абонементе.
+/*    $scope.getTicketById = function (id){
         $http({
             url: contextPathSubscriptionService + "/" + id,
             method: 'GET'
@@ -49,7 +52,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         }).catch(function (response) {
             alert(response.data.message);
         });
-    };
+    };*/
 
     $scope.isAdded = function (id){
         let added = false;
