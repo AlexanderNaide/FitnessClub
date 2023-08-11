@@ -30,20 +30,23 @@
     <tr class="body_string" ng-repeat="time in scheduleDto.trainingStartTime">
         <td class="time_grid">{{time}}</td>
         <td class="class_col grid" ng-repeat="day in scheduleDto.events">
-            <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" ng-click="getEventInformation(class.id)">
-                <div class="tt_class_button pointer add_button" title="Записаться" ng-click="addEvent(class.id, class.discipline)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-plus" viewBox="4 4 8 8">
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg>
+            <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >
+                <div class="row">
+                    <div class="place" ng-click="getEventInformation(class.id)"></div>
+                    <div class="tt_class_button pointer add_button" title="Записаться" ng-click="addEvent(class.id, class.discipline)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-plus" viewBox="4 4 8 8">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </div>
+                    <div class="tt_class_button pointer del_button" title="Отменить" ng-click="deleteEvent(class.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-dash" viewBox="4 4 8 8">
+                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="tt_class_button pointer del_button" title="Отменить" ng-click="deleteEvent(class.id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-dash" viewBox="4 4 8 8">
-                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                    </svg>
-                </div>
-                <div class="tt_class_title">{{class.discipline}}</div>
-                <div class="tt_class_message">{{class.comments }}</div>
-                <div class="tt_class_instructor">{{class.coachName}}</div>
+                <div class="tt_class_title" ng-click="getEventInformation(class.id)" >{{class.discipline}}</div>
+                <div class="tt_class_message" ng-click="getEventInformation(class.id)">{{class.comments }}</div>
+                <div class="tt_class_instructor" ng-click="getEventInformation(class.id)">{{class.coachName}}</div>
             </div>
         </td>
     </tr>
