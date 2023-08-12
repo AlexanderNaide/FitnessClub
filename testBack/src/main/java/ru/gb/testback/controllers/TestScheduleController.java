@@ -2,22 +2,19 @@ package ru.gb.testback.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.gb.testback.model.ClassDto;
-import ru.gb.testback.model.SubscriptionDto;
-import ru.gb.testback.model.SubscriptionResponse;
+import ru.gb.testback.model.clubEvents.ClubEventResponse;
 import ru.gb.testback.model.clubEvents.ScheduleFrontResponse;
 import ru.gb.testback.model.eventInformation.DisciplineResponse;
 import ru.gb.testback.model.eventInformation.EventInfoResponse;
 import ru.gb.testback.model.eventInformation.HallInfoResponse;
 import ru.gb.testback.model.eventInformation.TrainerResponse;
 import ru.gb.testback.services.ScheduleService;
-import ru.gb.testback.services.SubscriptionsService;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/schedule-service/api/v1/events")
+@RequestMapping("/schedule/api/v1/events")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestScheduleController {
@@ -29,10 +26,11 @@ public class TestScheduleController {
         return scheduleService.getSchedule();
     }
 
-    @GetMapping("/subscription")
+    // Метод для отправки списка абонементов (на фронте пока без него)
+/*    @GetMapping("/subscription")
     public List<String> getUserSubscriptions(){
         return scheduleService.getUserSubscriptionList().stream().map(SubscriptionDto::getDisciplineName).toList();
-    }
+    }*/
 
     @GetMapping("/personal")
     public List<Long> getUserEvents(){
@@ -51,18 +49,18 @@ public class TestScheduleController {
 
     @GetMapping("/{id}/info")
     public EventInfoResponse getSubscriptionById(@PathVariable Long id){
-        ClassDto classDto = scheduleService.getEventById(id);
+        ClubEventResponse clubEventResponse = scheduleService.getEventById(id);
 
         DisciplineResponse disciplineResponse = new DisciplineResponse();
-        disciplineResponse.setName(classDto.getTitle());
-        disciplineResponse.setDescription(scheduleService.findDescriptionByTitle(classDto.getTitle()));
+        disciplineResponse.setName(clubEventResponse.getDiscipline());
+        disciplineResponse.setDescription(scheduleService.findDescriptionByTitle(clubEventResponse.getDiscipline()));
 
         TrainerResponse trainerResponse = new TrainerResponse();
-        trainerResponse.setName(classDto.getTrainer());
+        trainerResponse.setName(clubEventResponse.getCoachName());
         trainerResponse.setDescription("Какая-то информация о тренере,которую желательно заполнить");
 
         HallInfoResponse hallInfoResponse = new HallInfoResponse();
-        hallInfoResponse.setName(ScheduleService.halls.get(classDto.getPlace()));
+        hallInfoResponse.setName(ScheduleService.halls.get(clubEventResponse.getHall()));
         hallInfoResponse.setAddress("Местоположение зала.");
         hallInfoResponse.setDescription("");
 
@@ -70,11 +68,11 @@ public class TestScheduleController {
         eventInfoResponse.setHall(hallInfoResponse);
         eventInfoResponse.setTrainer(trainerResponse);
         eventInfoResponse.setDiscipline(disciplineResponse);
-        eventInfoResponse.setId(classDto.getId());
-        eventInfoResponse.setDate(classDto.getDay());
-        eventInfoResponse.setStartTime(classDto.getTime());
-        eventInfoResponse.setDuration("60 мин.");
-        eventInfoResponse.setComment(classDto.getMessage());
+        eventInfoResponse.setId(clubEventResponse.getId());
+        eventInfoResponse.setDate(clubEventResponse.getEventDate());
+        eventInfoResponse.setStartTime(clubEventResponse.getStartTime());
+        eventInfoResponse.setDuration(clubEventResponse.getDuration());
+        eventInfoResponse.setComment(clubEventResponse.getComments());
 
         return eventInfoResponse;
     }

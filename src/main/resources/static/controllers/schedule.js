@@ -1,10 +1,10 @@
-angular.module('fitnessClub').controller('scheduleController', function ($rootScope, $scope, $http) {
-    const contextSchedulePath = 'http://localhost:5555/schedule-service/api/v1/events';
-    const contextPathSubscriptionService = 'http://localhost:5555/subscriptions-service/api/v1/subscriptions';
+angular.module('fitnessClub').controller('scheduleController', function ($scope, $http) {
+    const contextPathScheduleService = 'http://localhost:5555/schedule/api/v1/events';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
     $scope.loadSchedule = function () {
         $http({
-            url: contextSchedulePath + '/general',
+            url: contextPathScheduleService + '/general',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
@@ -12,11 +12,9 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
         });
     };
 
-    $rootScope.$emit('test');
-
     $scope.loadUserSubscriptions = function () {
         $http({
-            url: contextPathSubscriptionService,
+            url: contextPathAccountService + '/subscriptions/info',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
@@ -31,19 +29,20 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
 
     $scope.loadUserEvents = function () {
         $http({
-            url: contextSchedulePath + '/personal',
+            url: contextPathScheduleService + '/personal',
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
 
             // Лист Id с номерами событий
             $scope.userEventList = response.data;
+            $scope.reloadFilter();
         });
     };
 
     $scope.getEventInformation = function (id) {
         $http({
-            url: contextSchedulePath + "/" + id + "/info",
+            url: contextPathScheduleService + "/" + id + "/info",
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
@@ -84,10 +83,12 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
             alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
         } else {
             $http({
-                url: contextSchedulePath + "/subscribe/" + id,
+                url: contextPathScheduleService + "/subscribe/" + id,
                 method: 'POST'
             }).then(function () {
                 $scope.loadUserEvents();
+            }).catch(function (response) {
+                alert(response.data.message)
             });
         }
     };
@@ -97,7 +98,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
             alert('Для записи на это занятие вначале необходимо приобрести абонемент.');
         } else {
             $http({
-                url: contextSchedulePath + "/subscribe/" + id,
+                url: contextPathScheduleService + "/subscribe/" + id,
                 method: 'POST'
             }).then(function () {
                 $scope.loadUserEvents();
@@ -108,7 +109,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
 
     $scope.deleteEvent = function (id){
         $http({
-            url: contextSchedulePath + "/unsubscribe/" + id,
+            url: contextPathScheduleService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserEvents();
@@ -117,15 +118,23 @@ angular.module('fitnessClub').controller('scheduleController', function ($rootSc
 
     $scope.deleteEventOnModalInfo = function (id, modal){
         $http({
-            url: contextSchedulePath + "/unsubscribe/" + id,
+            url: contextPathScheduleService + "/unsubscribe/" + id,
             method: 'POST'
         }).then(function () {
             $scope.loadUserEvents();
             $scope.closeModal(modal);
         });
     };
-
     const filters = {};
+
+    $scope.reloadFilter = function (){
+        const interval = setInterval(function () {
+            clearInterval(interval);
+            const filterValue = $scope.concatValues(filters);
+            $scope.setFilter({filter: filterValue});
+
+        }, 10);
+    }
 
     $('.button-group').each(function (i, buttonGroup){
         const $buttonGroup = $(buttonGroup);

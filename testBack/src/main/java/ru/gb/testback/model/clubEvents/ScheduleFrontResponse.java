@@ -3,7 +3,6 @@ package ru.gb.testback.model.clubEvents;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.gb.testback.model.Event;
 
 import java.util.*;
 

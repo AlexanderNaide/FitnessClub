@@ -1,8 +1,8 @@
 angular.module('fitnessClub').controller('authController', function ($scope, $http, $location, $localStorage) {
-    const contextPathAuth = 'http://localhost:5555/three-oceans.fitness/api/v1/auth-service';
+    const contextPathAuthService = 'http://localhost:5555/auth/api/v1';
 
     $scope.authentications = function () {
-        $http.post(contextPathAuth + '/auth', $scope.auth)
+        $http.post(contextPathAuthService + '/auth', $scope.auth)
             .then(function (response) {
                 if(response.data.token){
                     console.log("Токен получен");
@@ -10,8 +10,8 @@ angular.module('fitnessClub').controller('authController', function ($scope, $ht
                     let jwt = response.data.token;
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
                     $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
-                    console.log('Role: ' + payload.authority);
-                    if (payload.authority == "admin"){
+                    // console.log('Role: ' + payload.authority);
+                    if (String(payload.authority) === String("admin")){
                         // console.log("It's admin");
                         $location.path('/admin');
                     } else {
@@ -25,7 +25,7 @@ angular.module('fitnessClub').controller('authController', function ($scope, $ht
     };
 
     $scope.registrations = function () {
-        $http.post(contextPathAuth + '/reg', $scope.reg)
+        $http.post(contextPathAuthService + '/registration', $scope.reg)
             .then(function (response) {
                 if(response.data.token){
                     console.log("Токен получен")

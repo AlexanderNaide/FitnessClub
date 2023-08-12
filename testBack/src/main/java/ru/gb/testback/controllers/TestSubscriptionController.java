@@ -10,36 +10,34 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/subscriptions-service/api/v1/subscriptions")
+@RequestMapping("/subscriptions/api/v1/subscriptions")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class TestSubscriptionController {
 
     private final SubscriptionsService subscriptionsService;
 
-    @GetMapping()
-    public List<SubscriptionDto> getUserSubscriptionList(){
-        return subscriptionsService.getUserSubscriptionList();
-    }
 
     @GetMapping("/get-all")
     public List<SubscriptionResponse> getAllSubscriptions(){
         return subscriptionsService.getAllSubscriptionList();
     }
 
-    @PostMapping("/subscribe/{id}")
+    @PostMapping("/buy/{id}")
     public void addSubscriptionForUser(@PathVariable Long id){
         subscriptionsService.addSubscriptionForUser(id);
     }
 
-    @PostMapping("/unsubscribe/{id}")
+    // Запрос на удаление абонемента - пока не нужен
+/*    @PostMapping("/unsubscribe/{id}")
     public void deleteSubscriptionForUser(@PathVariable Long id){
         subscriptionsService.deleteSubscriptionForUser(id);
-    }
+    }*/
 
-    @GetMapping("/{id}")
+    // Запрос подробной информации об абонементе.
+/*    @GetMapping("/{id}")
     public SubscriptionResponse getSubscriptionById(@PathVariable Long id){
         return subscriptionsService.getSubscription(id);
-    }
+    }*/
 
 }

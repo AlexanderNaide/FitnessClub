@@ -1,12 +1,12 @@
 angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
-    const contextPath = 'http://localhost:5555/three-oceans.fitness/api/v1/user-service';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients/accounts';
 
     $scope.loadInformation = function () {
         $http({
-            url: contextPath + '/info',
+            url: contextPathAccountService + '/info',
             method: 'GET'
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             $scope.UserInformation = response.data;
             $scope.UserInformation.usernameOld = $scope.UserInformation.username;
             $scope.UserInformation.phoneOld = $scope.UserInformation.phone;
@@ -24,7 +24,7 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         };
         clearClass();
         $http({
-            url: contextPath + '/save',
+            url: contextPathAccountService + '/info/update',
             method: 'POST',
             data: setUserInformation
         }).then(function (response) {
