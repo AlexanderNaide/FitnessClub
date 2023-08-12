@@ -6,7 +6,7 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
             url: contextPathAccountService + '/info',
             method: 'GET'
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             $scope.UserInformation = response.data;
             $scope.UserInformation.usernameOld = $scope.UserInformation.username;
             $scope.UserInformation.phoneOld = $scope.UserInformation.phone;

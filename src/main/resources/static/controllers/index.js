@@ -46,9 +46,9 @@
                     $location.path('/')
                 } else {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.fitnessClubUser.token;
-                    console.log('Role: ' + payload.authority);
-                    if (payload.authority == "admin"){
-                        console.log("It's admin");
+                    // console.log('Role: ' + payload.authority);
+                    if (String(payload.authority) === String("admin")){
+                        // console.log("It's admin");
                         $location.path('/admin');
                     }
                 }
@@ -69,10 +69,10 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
     }
 
     $scope.ifUserLoggedIn = function (){
-        return !!$localStorage.fitnessClubUser && $localStorage.fitnessClubUser.role != "admin";
+        return !!$localStorage.fitnessClubUser && String($localStorage.fitnessClubUser.role) !== String("admin");
     }
     $scope.ifAdminLoggedIn = function (){
-        return !!$localStorage.fitnessClubUser && $localStorage.fitnessClubUser.role == "admin";
+        return !!$localStorage.fitnessClubUser && String($localStorage.fitnessClubUser.role) === String("admin");
     }
 
 });

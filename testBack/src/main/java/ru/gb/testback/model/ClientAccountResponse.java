@@ -2,12 +2,9 @@ package ru.gb.testback.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class UserDto {
+public class ClientAccountResponse {
     private Long id;
-
     private String login;
     private String keypass;
     private String username;
@@ -16,17 +13,12 @@ public class UserDto {
 
     private String password;
 
-//    private List<SubscriptionDto> subscriptionDtoList;
-
-    public UserDto() {
+    public ClientAccountResponse() {
         this.id = 1L;
         this.login = "login1";
         this.keypass = "0000001";
         this.username = "First User";
         this.phone = "8-900-999-9999";
         this.email = "user@mail.ru";
-//        this.subscriptionDtoList = List.of(
-//                new SubscriptionDto(), new SubscriptionDto()
-//        );
     }
 }

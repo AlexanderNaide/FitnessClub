@@ -28,6 +28,8 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             method: 'POST'
         }).then(function () {
             $scope.loadUserSubscriptions();
+        }).catch(function (response) {
+            alert(response.data.message)
         });
     };
 
