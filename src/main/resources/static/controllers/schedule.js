@@ -36,6 +36,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
 
             // Лист Id с номерами событий
             $scope.userEventList = response.data;
+            $scope.reloadFilter();
         });
     };
 
@@ -122,8 +123,16 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             $scope.closeModal(modal);
         });
     };
-
     const filters = {};
+
+    $scope.reloadFilter = function (){
+        const interval = setInterval(function () {
+            clearInterval(interval);
+            const filterValue = $scope.concatValues(filters);
+            $scope.setFilter({filter: filterValue});
+
+        }, 10);
+    }
 
     $('.button-group').each(function (i, buttonGroup){
         const $buttonGroup = $(buttonGroup);
