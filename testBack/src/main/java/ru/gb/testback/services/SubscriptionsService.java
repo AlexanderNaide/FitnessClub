@@ -24,8 +24,6 @@ public class SubscriptionsService {
         return userSubscriptions.containsValue(getSubscriptionByName(discipline));
     }
 
-
-
     public List<SubscriptionResponse> getAllSubscriptionList() {
         return subscriptionRepository.findAll().values().stream().toList();
     }

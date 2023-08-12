@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.testback.model.AuthRequest;
 import ru.gb.testback.model.AuthResponse;
 import ru.gb.testback.model.RegRequest;
-import ru.gb.testback.model.UserDto;
-import ru.gb.testback.services.ScheduleService;
 
 
 @RestController

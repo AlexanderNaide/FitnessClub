@@ -87,6 +87,8 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
                 method: 'POST'
             }).then(function () {
                 $scope.loadUserEvents();
+            }).catch(function (response) {
+                alert(response.data.message)
             });
         }
     };

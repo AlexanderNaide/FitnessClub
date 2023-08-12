@@ -10,8 +10,8 @@ angular.module('fitnessClub').controller('authController', function ($scope, $ht
                     let jwt = response.data.token;
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
                     $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
-                    console.log('Role: ' + payload.authority);
-                    if (payload.authority == "admin"){
+                    // console.log('Role: ' + payload.authority);
+                    if (String(payload.authority) === String("admin")){
                         // console.log("It's admin");
                         $location.path('/admin');
                     } else {
