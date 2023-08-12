@@ -1,16 +1,11 @@
 package ru.gb.testback.services;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.testback.model.ClassDto;
-import ru.gb.testback.model.Event;
 import ru.gb.testback.model.SubscriptionDto;
-import ru.gb.testback.model.SubscriptionResponse;
 import ru.gb.testback.model.clubEvents.*;
 import ru.gb.testback.repositories.SchedulesRepository;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,13 +36,13 @@ public class ScheduleService {
         halls.put("little", "МАЛЫЙ ЗАЛ   (2 этаж)");
     }
 
-    public List<Event> getScheduleList() {
+    public List<ClubEventResponse> getScheduleList() {
         return schedulesRepository.findAll().values().stream().toList();
     }
 
     public ScheduleFrontResponse getSchedule() {
-        List<Event> listEvent = schedulesRepository.findAll().values().stream().toList();
-        List<String> scheduleTimer = listEvent.stream().map(e -> (ClassDto) e).map(ClassDto::getTime).collect(Collectors.toSet()).stream().sorted().toList();
+        List<ClubEventResponse> listEvent = schedulesRepository.findAll().values().stream().toList();
+        List<String> scheduleTimer = listEvent.stream().map(ClubEventResponse::getStartTime).collect(Collectors.toSet()).stream().sorted().toList();
         List<DayScheduleResponse> events = sortEventsByDays(listEvent);
         return new ScheduleFrontResponse(halls, daysOfWeek, scheduleTimer, events);
     }
@@ -60,12 +55,12 @@ public class ScheduleService {
         }
     }
 
-    private List<DayScheduleResponse> sortEventsByDays(List<Event> events) {
+    private List<DayScheduleResponse> sortEventsByDays(List<ClubEventResponse> events) {
         List<DayScheduleResponse> weekSchedule = new ArrayList<>();
         for (String day : daysOfWeek) {
             DayScheduleResponse dayResponse = new DayScheduleResponse();
             dayResponse.setDayOfWeek(day);
-            dayResponse.setEventsOfADay(events.stream().map(e -> (ClassDto) e).filter(e -> e.getDay().equals(day)).map(Converter::convertToEventResponse).toList());
+            dayResponse.setEventsOfADay(events.stream().filter(e -> e.getEventDate().equals(day)).toList());
             weekSchedule.add(dayResponse);
         }
         return weekSchedule;
@@ -79,9 +74,9 @@ public class ScheduleService {
         if(userEvents == null){
             userEvents = new HashMap<>();
         }
-        ClassDto event = (ClassDto) schedulesRepository.findById(id);
-        if(subscriptionsService.isSubscribe(event.getTitle())){
-            userEvents.put(id, Converter.convertToEventResponse(event));
+        ClubEventResponse event = schedulesRepository.findById(id);
+        if(subscriptionsService.isSubscribe(event.getDiscipline())){
+            userEvents.put(id, event);
         }
     }
 
@@ -89,8 +84,8 @@ public class ScheduleService {
         userEvents.remove(id);
     }
 
-    public ClassDto getEventById(Long id){
-        return (ClassDto) schedulesRepository.findById(id);
+    public ClubEventResponse getEventById(Long id){
+        return schedulesRepository.findById(id);
     }
 
     public String findDescriptionByTitle(String title){

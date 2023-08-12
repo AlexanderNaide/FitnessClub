@@ -2,13 +2,12 @@ package ru.gb.testback.model.clubEvents;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.gb.testback.model.Event;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class Hall implements Event {
+public class Hall {
 
     private Long id;
 

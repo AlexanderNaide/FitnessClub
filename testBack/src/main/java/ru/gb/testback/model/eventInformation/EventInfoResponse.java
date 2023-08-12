@@ -1,10 +1,9 @@
 package ru.gb.testback.model.eventInformation;
 
 import lombok.Data;
-import ru.gb.testback.model.Event;
 
 @Data
-public class EventInfoResponse implements Event {
+public class EventInfoResponse {
     private HallInfoResponse hall;
     private TrainerResponse trainer;
     private DisciplineResponse discipline;
