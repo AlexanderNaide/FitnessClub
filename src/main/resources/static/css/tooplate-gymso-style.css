@@ -478,9 +478,22 @@ https://www.tooplate.com/view/2119-gymso-fitness
     text-transform: uppercase;
   }
 
+ .schedule-table{
+   width: 100%;
+ }
+
+  /*.schedule-table th:not(.fa){*/
+  /*  width: 13.5%;*/
+  /*}*/
+
+.schedule-table th:not(:first-child){
+  width: 13.5%;
+}
+
   .table-bordered td, 
   .table-bordered th {
     border: 1px solid #212122;
+
   }
 
   .table-bordered td {
@@ -488,7 +501,11 @@ https://www.tooplate.com/view/2119-gymso-fitness
   }
 
   .table td, .table th {
-    padding: 1rem;
+    padding: 0.75rem 0;
+  }
+
+  .schedule-table tbody .grid {
+    padding: 0 4px 0 4px;
   }
 
 

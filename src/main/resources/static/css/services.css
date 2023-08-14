@@ -1,52 +1,69 @@
-.schedule_table{
-	margin-bottom: 160px;
-}
 
-.schedule_table.table,
-.schedule_table td {
-	/*border-top: 1px solid #333;*/
-	border: 1px solid #333;
-	/*margin-left: -60px;*/
-}
 .all{
 	background-color: aliceblue;
 }
-.fitness{
-	background-color: #fdfdb8;
+
+.class_grid {
+	position: relative; /* Относительное позиционирование */
+	background: darkgray; /* Цвет фона */
+	padding: 10px 2px; /* Поля вокруг текста */
+	overflow: hidden; /* Обрезаем лишнее */
+	margin: 4px 0 4px 0;
+
 }
-.dance{
-	background-color: #d2d2d2;
+.class_grid::after {
+	content: ''; /* Выводим треугольник */
+	position: absolute; /* Абсолютное позиционирование */
+	top: 0; left: 0; /* Положение треугольника */
+	/* Создание треугольника */
+	width: 0; height: 0;
+	border-style: solid;
+	border-width: 0 0 20px 20px;
+	box-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
-.green{
-	background-color: #bef38c;
-}
-.little{
-	background-color: pink;
-}
-.class_col{
-	vertical-align: top;
-}
-.class_grid{
-	/*height: 7rem;*/
-	width: 10vw;
-	padding: 6px;
-	/*border-radius: 10px;*/
-	/*border: 1px solid #333;*/
-	text-align: center;
-	/*font-family: "Arial Black", serif ;*/
-	font-family: math;
-	z-index: 1;
-}
-.sticker{
+
+.sticker {
+	position: relative; /* Относительное позиционирование */
+	background: var(--gray-color); /* Цвет фона */
+	padding: 10px 20px; /* Поля вокруг текста */
+	overflow: hidden; /* Обрезаем лишнее */
 	height: 4rem;
 	width: 9vw;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	margin-top: -10px;
 	margin-right: 10px;
 	display:grid;
 	text-align: center;
 	/*font-family: "Arial Black", serif ;*/
 	font-family: math;
+
+}
+.sticker::after {
+	content: ''; /* Выводим треугольник */
+	position: absolute; /* Абсолютное позиционирование */
+	top: 0; left: 0; /* Положение треугольника */
+	/* Создание треугольника */
+	width: 0; height: 0;
+	border-style: solid;
+	border-width: 0 0 20px 20px;
+	box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+.fitness::after {
+	border-color: transparent transparent yellow var(--dark-color);
+}
+
+.dance::after{
+	border-color: transparent transparent blue var(--dark-color);
+}
+.green::after{
+	border-color: transparent transparent green var(--dark-color);
+}
+.little::after{
+	border-color: transparent transparent deeppink var(--dark-color);
+}
+.class_col{
+	vertical-align: top;
 }
 
 .place{
@@ -65,7 +82,7 @@
 
 .time_grid{
 	text-align: center;
-	width: 11vw;
+	/*width: 4vw;*/
 }
 .head_string td{
 	height: 3rem;
@@ -89,15 +106,16 @@
 	font-size:12pt;
 	height: 20px;
 	text-align: right;
-	margin-top: -10px;
-	margin-right: 10px;
+	margin-top: -12px;
+	margin-right: 18px;
+	margin-bottom: 2px;
 }
 .place{
 	flex-grow: 1;
 }
 .active
 {
-	font-weight:bold;
+	/*font-weight:bold;*/
 }
 
 .sticker:not(.active){
