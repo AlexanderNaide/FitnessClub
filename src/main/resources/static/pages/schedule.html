@@ -38,8 +38,10 @@
                     <tbody>
                         <tr class="body_string" ng-repeat="time in scheduleDto.trainingStartTime">
                             <td class="time_grid">{{time}}</td>
-                            <td class="class_col grid" ng-repeat="day in scheduleDto.events">
-                                <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >
+<!--                            <td class="class_col grid" ng-repeat="day in scheduleDto.events">-->
+                            <td class="grid" ng-repeat="day in scheduleDto.events">
+<!--                                <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >-->
+                                <div class="{{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >
                                     <div class="row">
                                         <div class="place" ng-click="getEventInformation(class.id)"></div>
                                         <div class="tt_class_button pointer add_button" title="Записаться" ng-click="addEvent(class.id, class.discipline)">
