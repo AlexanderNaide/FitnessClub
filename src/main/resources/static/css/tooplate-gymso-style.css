@@ -145,6 +145,10 @@ https://www.tooplate.com/view/2119-gymso-fitness
     transition: all 0.3s ease;
   }
 
+.black-font-custom-btn {
+  color: grey;
+}
+
   .custom-btn:hover {
     color: var(--primary-color);
   }
@@ -222,6 +226,10 @@ https://www.tooplate.com/view/2119-gymso-fitness
     opacity: 0.85;
   }
 
+  /*.section{*/
+  /*  margin-top: 76px;*/
+  /*}*/
+
 
   /*---------------------------------------
      MODAL              
@@ -234,9 +242,19 @@ https://www.tooplate.com/view/2119-gymso-fitness
   .modal-header,
   .modal-body,
   .modal-footer {
+    display: flex;
+    flex-direction: column;
     border: 0;
     padding: 0;
   }
+
+.modal-footer .black-font-custom-btn {
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
   .membership-form a {
     color: var(--primary-color);
@@ -529,6 +547,11 @@ https://www.tooplate.com/view/2119-gymso-fitness
     height: calc(2.25rem + 20px);
   }
 
+  .webform input,
+  button.submit-button {
+    height: calc(2.25rem + 20px);
+  }
+
   .form-control {
     border-radius: var(--border-radius-small);
     margin: 1.3rem 0;
@@ -547,7 +570,19 @@ https://www.tooplate.com/view/2119-gymso-fitness
     transition: all 0.3s ease;
   }
 
+  button.submit-button {
+    background: var(--dark-color);
+    border-color: transparent;
+    color: var(--white-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
   button#submit-button:hover {
+    background: var(--primary-color);
+  }
+
+  button.submit-button:hover {
     background: var(--primary-color);
   }
 

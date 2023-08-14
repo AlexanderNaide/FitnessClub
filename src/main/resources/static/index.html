@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--        <script src="js/jquery.min.js"></script>-->
     <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -19,8 +20,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/services.css">
         <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+        <script src="js/aos.js"></script>
+        <script src="js/smoothscroll.js"></script>
+        <script src="js/custom.js"></script>
         <script src="controllers/index.js"></script>
-        <script src="controllers/auth.js"></script>
+<!--        <script src="controllers/auth.js"></script>-->
         <script src="controllers/home.js"></script>
         <script src="controllers/user_info.js"></script>
         <script src="controllers/services.js"></script>
@@ -29,8 +33,10 @@
         <title>Fitness Club</title>
     </head>
 
+<!--    <body  data-spy="scroll" data-target="#navbarNav" data-offset="50">-->
     <body>
-        <div class="container" ng-controller="indexController">
+<!--        <div class="container" ng-controller="indexController">-->
+        <div ng-controller="indexController">
             <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="container">
                     <a class="navbar-brand link-dark" href="#!/" style="font-size: xx-large">Just<span style="color: #f13a11">4</span>feat</a>
@@ -43,23 +49,27 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-lg-auto">
                             <li class="nav-item">
-                                <a href="#!/home" class="nav-link smoothScroll">На главную</a>
+                                <a href="#!/" id="hone-linc" class="nav-link active">Главная</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#!/info" class="nav-link smoothScroll">Личные данные</a>
+                                <a href="#!/info" class="nav-link">Личные данные</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#!/services" class="nav-link smoothScroll">Мои занятия</a>
+                                <a href="#!/services" class="nav-link">Мои занятия</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#!/schedule" class="nav-link smoothScroll">Расписание клуба</a>
+                                <a href="#!/schedule" class="nav-link">Расписание клуба</a>
+                            </li>
+
+                            <li class="nav-item2">
+                                <a href="#!/schedule" class="nav-link2">Расписание клуба</a>
                             </li>
 
                             <li class="nav-item log_out_button hidden">
-                                <a href="#" ng-click="clearUser()" class="nav-link smoothScroll">Выйти</a>
+                                <a href="#" ng-click="clearUser()" class="nav-link">Выйти</a>
                             </li>
 
                             <li class="nav-item log_in_button">
@@ -72,77 +82,62 @@
             </nav>
 
 
-            <div class="row align-items-start" style="height: 140px; padding: 30px;">
-            </div>
-
             <ng-view></ng-view>
 
 
-
             <div class="modal fade" id="modalAuth" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+
+                <div class="modal-dialog modal-dialog-centered ml-auto col-lg-5 col-md-6 col-12">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-center">
                             <h5 class="modal-title">{{modalStatus}}</h5>
                         </div>
 
                         <div class="modal-body authorizationWindow">
-                            <div class="form-group mb-3">
-                                <label for="logUsername">Логин</label>
-                                <input class="form-control" type="text" ng-model="auth.username" id="logUsername">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="logPassword">Пароль</label>
-                                <input class="form-control" type="text" ng-model="auth.password" id="logPassword">
-                            </div>
-                        </div>
-
-                        <div class="modal-body registrationWindow hidden">
-                            <div>
-                                <div class="form-group mb-3">
-                                    <label for="regUsername">Логин</label>
-                                    <input class="form-control" type="text" ng-model="reg.username" id="regUsername" placeholder="login">
+                            <form class="webform">
+                                <div class="authorizationWindow">
+                                    <input type="text" class="form-control" ng-model="auth.username" placeholder="Логин" title="Логин пользователя">
+                                    <input type="text" class="form-control" ng-model="auth.password" placeholder="Пароль" title="Пароль пользователя">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group mb-3">
-                                        <label for="regPassword">Пароль</label>
-                                        <input class="form-control" type="password" ng-model="reg.password" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="password">
+
+                                <div class="registrationWindow hidden">
+                                    <input type="text" class="form-control" ng-model="reg.username" id="regUsername" placeholder="Логин" title="Придумайте Логин для входа">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <input type="password" class="form-control" ng-model="reg.password" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="Пароль" title="Придумайте пароль">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <input type="password" class="form-control" ng-model="reg.confirmPassword" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="Подтверждение" title="Повторите ввод пароль">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group mb-3">
+                                            <input class="form-control" type="text" ng-model="auth.realName" id="realName" placeholder="Фамилия Имя Отчество" title="Введите полное имя (ФИО)">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group mb-3">
+                                            <input id="phone" class="form-control" type="text" ng-model="reg.phone" ng-change="phoneMatching()" placeholder="Телефон" title="Номер телефона">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group mb-3">
+                                            <input id="email" class="form-control" type="text" ng-model="reg.email" ng-change="emailMatching()" placeholder="Электронная почта" title="Адрес электронной почты">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group mb-3">
-                                        <label for="confirmPassword">Подтверждение пароля</label>
-                                        <input class="form-control" type="password" ng-model="reg.confirmPassword" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="confirm password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group mb-3">
-                                    <label for="realName">Полное имя</label>
-                                    <input class="form-control" type="text" ng-model="auth.realName" id="realName">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group mb-3">
-                                    <label for="phone">Телефон</label>
-                                    <input id="phone" class="form-control" type="text" ng-model="reg.phone" ng-change="phoneMatching()" placeholder="+7 900 000 0000">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group mb-3">
-                                    <label for="email">Электронная почта</label>
-                                    <input id="email" class="form-control" type="text" ng-model="reg.email" ng-change="emailMatching()" placeholder="user@mail.ru">
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="modal-footer d-flex justify-content-around">
-                            <button class="btn btn-primary authorizationWindow" ng-click="getRegistrations()" type="button">Регистрация</button>
-                            <button class="btn btn-primary registrationWindow hidden" ng-click="getAuthorizations()" type="button">Авторизация</button>
-                            <button class="btn btn-success authorizationWindow" ng-click="authentications() && closeModal('#modalAuth')">Войти</button>
-                            <button class="btn btn-success registrationWindow hidden" ng-click="registrations() " type="button">Зарегистрироваться</button>
+                                <div class="modal-footer container">
+                                    <button class="form-control authorizationWindow btn custom-btn black-font-custom-btn" ng-click="getRegistrations()" type="button">Регистрация</button>
+                                    <button class="form-control registrationWindow hidden btn custom-btn black-font-custom-btn" ng-click="getAuthorizations()" type="button">Авторизация</button>
+                                    <button class="form-control authorizationWindow submit-button" ng-click="authentications() && closeModal('#modalAuth')">Войти</button>
+                                    <button class="form-control registrationWindow hidden submit-button" ng-click="registrations() " type="button">Зарегистрироваться</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
