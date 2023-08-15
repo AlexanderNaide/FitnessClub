@@ -17,4 +17,9 @@ public class SubscriptionResponse {
     private Integer workoutCount;
     private Integer daysToExpire;
     private BigDecimal price;
+
+    // Необходимо добавить на общем бэке:
+    private String category;
+    private String trainer;
+    private String image;
 }

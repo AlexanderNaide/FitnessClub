@@ -2,6 +2,14 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
     const contextPathSubscriptionService = 'http://localhost:5555/subscriptions/api/v1/subscriptions';
     const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.class-linc');
+        $button.addClass('active');
+    };
+
+
     $scope.loadUserSubscriptions = function () {
         $http({
             url: contextPathAccountService + '/subscriptions/info',
@@ -18,7 +26,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
-            $scope.addSubscriptionList = response.data;
+            $scope.allSubscriptionList = response.data;
         });
     };
 
@@ -68,5 +76,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         return added;
     };
 
+    $scope.setActiveLinc();
     $scope.loadUserSubscriptions();
+    $scope.getAllSubscriptions();
 });

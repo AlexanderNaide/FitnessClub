@@ -116,9 +116,9 @@
 	margin-right: 18px;
 	margin-bottom: 2px;
 }
-.place{
-	flex-grow: 1;
-}
+/*.place{*/
+/*	flex-grow: 1;*/
+/*}*/
 /*.active
 {
 	color: var(--primary-color)
@@ -128,9 +128,13 @@
 	color: var(--white-color);
 }*/
 
-.timetable_filtering{
-	margin-top: 60px;
-}
+/*section{*/
+/*	margin-top: 60px;*/
+/*}*/
+
+/*.timetable_filtering{*/
+/*	margin-top: 60px;*/
+/*}*/
 
 .tt_class
 {
