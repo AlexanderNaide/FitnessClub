@@ -469,8 +469,8 @@ https://www.tooplate.com/view/2119-gymso-fitness
   .table .thead-light th,
   .schedule-table tr td:first-child {
     background: var(--primary-color);
-    /*border: 1px solid #212122;*/
-    border: 1px solid var(--white-color);
+    border: 1px solid #212122;
+    /*border: 1px solid var(--white-color);*/
     color: var(--white-color);
   }
 
@@ -494,7 +494,8 @@ https://www.tooplate.com/view/2119-gymso-fitness
   .table-bordered td, 
   .table-bordered th {
     /*border: 1px solid #212122;*/
-    border: 1px solid var(--white-color);
+    /*border: 1px solid var(--white-color);*/
+    border: 1px solid var(--primary-color);
 
   }
 
