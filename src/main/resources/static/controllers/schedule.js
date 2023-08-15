@@ -2,6 +2,13 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
     const contextPathScheduleService = 'http://localhost:5555/schedule/api/v1/events';
     const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.schedule-linc');
+        $button.addClass('active');
+    };
+
     $scope.loadSchedule = function () {
         $http({
             url: contextPathScheduleService + '/general',
@@ -132,7 +139,6 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             clearInterval(interval);
             const filterValue = $scope.concatValues(filters);
             $scope.setFilter({filter: filterValue});
-
         }, 10);
     }
 
@@ -141,9 +147,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         $buttonGroup.on('click', 'div', function (event) {
             $buttonGroup.find('.active').removeClass('active');
             const $button = $(event.currentTarget);
-            if ($button.hasClass('all')){
-                $buttonGroup.find('.item_filter_btn').addClass('active');
-            } else {
+            if (!$button.hasClass('all')){
                 $button.addClass('active');
             }
         });
@@ -176,6 +180,8 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
         return value;
     };
 
+
+    $scope.setActiveLinc();
     $scope.loadUserEvents();
     $scope.loadUserSubscriptions();
     $scope.loadSchedule();

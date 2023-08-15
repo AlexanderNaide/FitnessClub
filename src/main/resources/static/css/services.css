@@ -1,14 +1,10 @@
-
-.all{
-	background-color: aliceblue;
-}
-
 .class_grid {
 	position: relative; /* Относительное позиционирование */
-	background: darkgray; /* Цвет фона */
+	background: var(--dark-color); /* Цвет фона */
 	padding: 10px 2px; /* Поля вокруг текста */
 	overflow: hidden; /* Обрезаем лишнее */
 	margin: 4px 0 4px 0;
+	box-shadow: 0 -40px 40px -40px var(--gray-color) inset;
 
 }
 .class_grid::after {
@@ -24,21 +20,28 @@
 
 .sticker {
 	position: relative; /* Относительное позиционирование */
-	background: var(--gray-color); /* Цвет фона */
-	padding: 10px 20px; /* Поля вокруг текста */
-	overflow: hidden; /* Обрезаем лишнее */
+	/*background: var(--gray-color); !* Цвет фона *!*/
+	padding: 15px 10px 10px 10px; /* Поля вокруг текста */
+	/*overflow: hidden; !* Обрезаем лишнее *!*/
 	height: 4rem;
 	width: 9vw;
 	/*border-radius: 10px;*/
 	margin-top: -10px;
 	margin-right: 10px;
-	display:grid;
+	/*display:grid;*/
+	/*text-align: center;*/
+
+	display: block;
 	text-align: center;
+	color: var(--white-color);
 	/*font-family: "Arial Black", serif ;*/
-	font-family: math;
+	/*font-family: math;*/
+	box-shadow: 0 -40px 40px -40px var(--gray-color) inset;
+	/*border: 1px solid var(--white-color);*/
 
 }
-.sticker::after {
+
+.sticker:not(.all)::after {
 	content: ''; /* Выводим треугольник */
 	position: absolute; /* Абсолютное позиционирование */
 	top: 0; left: 0; /* Положение треугольника */
@@ -50,17 +53,17 @@
 }
 
 .fitness::after {
-	border-color: transparent transparent yellow var(--dark-color);
+	border-color: transparent transparent var(--dark-color) yellow ;
 }
 
 .dance::after{
-	border-color: transparent transparent blue var(--dark-color);
+	border-color: transparent transparent var(--dark-color) blue;
 }
 .green::after{
-	border-color: transparent transparent green var(--dark-color);
+	border-color: transparent transparent var(--dark-color) green;
 }
 .little::after{
-	border-color: transparent transparent deeppink var(--dark-color);
+	border-color: transparent transparent var(--dark-color) deeppink;
 }
 .class_col{
 	vertical-align: top;
@@ -93,14 +96,17 @@
 .tt_class_title{
 	font-size:12pt;
 	height: 3rem;
+	color: var(--white-color);
 }
 .tt_class_message{
 	font-size:8pt;
 	height: 1rem;
+	color: var(--white-color);
 }
 .tt_class_instructor{
 	font-size:10pt;
 	height: 1rem;
+	color: var(--white-color);
 }
 .tt_class_button{
 	font-size:12pt;
@@ -113,15 +119,18 @@
 .place{
 	flex-grow: 1;
 }
-.active
+/*.active
 {
-	/*font-weight:bold;*/
+	color: var(--primary-color)
 }
 
 .sticker:not(.active){
-	background-color: aliceblue;
-}
+	color: var(--white-color);
+}*/
 
+.timetable_filtering{
+	margin-top: 60px;
+}
 
 .tt_class
 {
@@ -143,9 +152,19 @@
 	margin: 30px 12px;
 }
 
-.signature.active{
-	text-decoration: underline;
+/*.signature.active{
+	!*text-decoration: underline;*!
+	color: var(--primary-color)
+}*/
+
+.signature.active .signature_btn,
+.signature .signature_btn:hover,
+.sticker.active .tt_class_title,
+.sticker .tt_class_title:hover
+{
+	color: var(--primary-color);
 }
+
 .pointer{
 	cursor: pointer;
 }
