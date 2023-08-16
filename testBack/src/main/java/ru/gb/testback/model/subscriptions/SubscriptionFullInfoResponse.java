@@ -23,5 +23,6 @@ public class SubscriptionFullInfoResponse {
     private String image;
     private BigDecimal price;
     private String duration;
+    private Integer workoutCount;
     private String comment;
 }

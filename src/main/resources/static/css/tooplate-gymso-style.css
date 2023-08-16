@@ -431,6 +431,30 @@ https://www.tooplate.com/view/2119-gymso-fitness
     text-align: center;
   }
 
+.class-done{
+  font-weight: var(--font-weight-bold);
+  display: block;
+  position: absolute;
+  top: -2rem;
+  right: 0rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+
+  /*display: block;*/
+  /*position: absolute;*/
+  /*left: 20px;*/
+  /*top: 10.5px;*/
+  /*content: '✔';*/
+  font-size:xxx-large;
+  /*width: 20px;*/
+  /*height: 20px;*/
+  /*line-height: 22px;*/
+  text-align: center;
+  color:#9CD106;
+  /*font-weight: normal;*/
+}
+
 .class-info h3 {
   min-height:76px;
   height:100%;

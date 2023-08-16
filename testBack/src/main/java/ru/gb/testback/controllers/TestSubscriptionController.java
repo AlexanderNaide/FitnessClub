@@ -60,6 +60,7 @@ public class TestSubscriptionController {
         subscriptionFullInfoResponse.setId(subscriptionResponse.getId());
         subscriptionFullInfoResponse.setImage(subscriptionResponse.getImage());
         subscriptionFullInfoResponse.setPrice(subscriptionResponse.getPrice());
+        subscriptionFullInfoResponse.setWorkoutCount(subscriptionResponse.getWorkoutCount());
         if (clubEventResponse != null){
             subscriptionFullInfoResponse.setDuration(clubEventResponse.getDuration());
         }
