@@ -3,6 +3,7 @@ package ru.gb.testback.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.testback.model.*;
+import ru.gb.testback.model.subscriptions.SubscriptionResponse;
 import ru.gb.testback.services.SubscriptionsService;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class TestAccountController {
     }
 
     @GetMapping("/subscriptions/info")
-    public List<SubscriptionDto> getUserSubscriptionList(){
+    public List<SubscriptionResponse> getUserSubscriptionList(){
         return subscriptionsService.getUserSubscriptionList();
     }
 

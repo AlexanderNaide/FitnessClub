@@ -122,4 +122,8 @@ public class SchedulesRepository {
     public String findDescriptionByTitle(String title) {
         return disciplineDescriptionRepository.get(title);
     }
+
+    public ClubEventResponse findEventResponseByTitle (String title){
+        return scheduleRepository.values().stream().filter(e -> e.getDiscipline().equals(title)).findFirst().orElse(null);
+    }
 }

@@ -16,7 +16,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
-            $scope.subscriptionDtoList = response.data;
+            $scope.userSubscriptionList = response.data;
         });
     };
 
@@ -65,6 +65,19 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         });
     };*/
 
+    $scope.getSubInfo = function (id) {
+        $http({
+            url: contextPathSubscriptionService + "/" + id + "/info",
+            method: 'GET'
+        }).then(function (response) {
+            console.log(response.data);
+            $scope.CurrentSub = response.data;
+            $('#subscriptionInformationForm').modal('toggle');
+        }).catch(function (response) {
+            alert(response.data.message);
+        });
+    };
+
     $scope.isAdded = function (id){
         let added = false;
         for (const sub of $scope.subscriptionDtoList) {
@@ -74,6 +87,10 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             }
         }
         return added;
+    };
+
+    $scope.closeModal = function (modal){
+        $(modal).modal('hide');
     };
 
     $scope.setActiveLinc();

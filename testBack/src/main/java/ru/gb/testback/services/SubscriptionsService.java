@@ -2,12 +2,9 @@ package ru.gb.testback.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.testback.model.SubscriptionDto;
-import ru.gb.testback.model.SubscriptionResponse;
+import ru.gb.testback.model.subscriptions.SubscriptionResponse;
 import ru.gb.testback.repositories.SubscriptionsRepository;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +33,11 @@ public class SubscriptionsService {
         return subscriptionRepository.findByName(discipline);
     }
 
-    public List<SubscriptionDto> getUserSubscriptionList() {
+    public List<SubscriptionResponse> getUserSubscriptionList() {
         if (userSubscriptions == null || userSubscriptions.size() == 0){
             return new ArrayList<>();
         } else {
-            return userSubscriptions.values().stream().map(e -> new SubscriptionDto(e.getId(), e.getWorkoutCount(), e.getDiscipline(), LocalDate.now().plusDays(e.getDaysToExpire()))).toList();
+            return userSubscriptions.values().stream().toList();
         }
     }
 

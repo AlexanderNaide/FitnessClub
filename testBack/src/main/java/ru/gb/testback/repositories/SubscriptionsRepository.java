@@ -2,7 +2,7 @@ package ru.gb.testback.repositories;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
-import ru.gb.testback.model.SubscriptionResponse;
+import ru.gb.testback.model.subscriptions.SubscriptionResponse;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

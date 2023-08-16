@@ -1,4 +1,4 @@
-package ru.gb.testback.model;
+package ru.gb.testback.model.subscriptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

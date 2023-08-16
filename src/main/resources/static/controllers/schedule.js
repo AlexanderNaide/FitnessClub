@@ -29,7 +29,7 @@ angular.module('fitnessClub').controller('scheduleController', function ($scope,
             // Запрашивается список абонементов и пересыпается в список строк
             $scope.userSubscriptionList = [];
             for (const dto of response.data) {
-                $scope.userSubscriptionList.push(dto.disciplineName);
+                $scope.userSubscriptionList.push(dto.discipline);
             }
         });
     };
