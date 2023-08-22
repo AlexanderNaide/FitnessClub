@@ -1,9 +1,16 @@
 angular.module('fitnessClub').controller('userInfoController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8081/three-oceans.fitness/api/v1/user-service';
+    const contextPath = 'http://localhost:5555/accounts/api/v1/clients';
+
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.info-linc');
+        $button.addClass('active');
+    };
 
     $scope.loadInformation = function () {
         $http({
-            url: contextPath + '/info',
+            url: contextPath + '/accounts/info',
             method: 'GET'
         }).then(function (response) {
             console.log(response.data);
@@ -24,7 +31,7 @@ angular.module('fitnessClub').controller('userInfoController', function ($scope,
         };
         clearClass();
         $http({
-            url: contextPath + '/save',
+            url: contextPath + '/accounts/info/update',
             method: 'POST',
             data: setUserInformation
         }).then(function (response) {
@@ -104,5 +111,6 @@ angular.module('fitnessClub').controller('userInfoController', function ($scope,
     }
 
     $scope.loadInformation();
+    $scope.setActiveLinc();
 
 });
