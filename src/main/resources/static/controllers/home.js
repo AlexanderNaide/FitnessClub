@@ -1,6 +1,13 @@
 angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
     const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients/accounts';
 
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.home-linc');
+        $button.addClass('active');
+    };
+
     $scope.loadInformation = function () {
         $http({
             url: contextPathAccountService + '/info',
@@ -104,5 +111,6 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
     }
 
     $scope.loadInformation();
+    $scope.setActiveLinc();
 
 });

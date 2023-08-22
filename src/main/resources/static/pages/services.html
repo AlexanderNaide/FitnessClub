@@ -1,13 +1,12 @@
 <section class="class section">
     <div class="container">
-        <div class="row">
+        <div class="row {{ifMainSubscriptionAvailable()}}">
 
             <div class="col-lg-12 col-12 text-center mb-5">
-
                 <h2 data-aos="fade-up" data-aos-delay="200">Активные занятия</h2>
             </div>
 
-            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 0">
+            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 0" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -16,7 +15,6 @@
 
                         <span><strong>Тренер</strong> - {{sub.trainer}}</span><br>
 
-<!--                        <span class="class-price">₽{{sub.price}}</span>-->
                         <span class="class-done">✔</span>
 
                         <span><strong>Количество занятий</strong> - {{sub.workoutCount}}</span>
@@ -24,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 1">
+            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -40,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 2">
+            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -55,13 +53,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
 
-<section class="class section" id="class">
-    <div class="container">
         <div class="row">
 
             <div class="col-lg-12 col-12 text-center mb-5">
@@ -86,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 1">
+            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src={{sub.image}} class="img-fluid" alt="Class">
 
@@ -102,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 2">
+            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src={{sub.image}} class="img-fluid" alt="Class">
 
@@ -125,63 +118,8 @@
 <!-- SCRIPTS -->
 <script src="../js/custom.js"></script>
 
-<!--<div class="row align-items-start">
-    <div class="col-3">
-
-        <button class="add_subscription_button" ng-click="getAllSubscriptions()" data-bs-toggle="modal" data-bs-target="#subscriptionsList" ng-click="getSubscriptions()">
-            Добавить абонемент
-        </button>
-
-    </div>
-    <div class="col-9">
-        <nav class="navbar bg-light">
-            <div class="container-fluid">
-                <div class="col-7">
-                    <a class="navbar-brand"> <h3>Список услуг</h3></a>
-                </div>
-                <div class="col-5">
-                </div>
-            </div>
-        </nav>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Наименование</th>
-                <th>Количество занятий</th>
-                <th>Дата окончания</th>
-&lt;!&ndash;                <th></th>&ndash;&gt;
-            </tr>
-            </thead>
-            <tbody>
-&lt;!&ndash;            <tr ng-repeat="t in UserInformation.subscriptionDtoList">&ndash;&gt;
-            <tr ng-repeat="t in subscriptionDtoList">
-
-                &lt;!&ndash;Вариант без открытия&ndash;&gt;
-                <td>{{t.disciplineName}}</td>
-                <td>{{t.numOfWorkouts}}</td>
-                <td>{{t.expired}}</td>
-&lt;!&ndash;                <td>&ndash;&gt;
-&lt;!&ndash;                    <button type="button" class="btn btn-outline-secondary" ng-click="deleteSubscription(t.id)">&ndash;&gt;
-&lt;!&ndash;                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">&ndash;&gt;
-&lt;!&ndash;                            <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"/>&ndash;&gt;
-&lt;!&ndash;                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>&ndash;&gt;
-&lt;!&ndash;                        </svg>&ndash;&gt;
-&lt;!&ndash;                    </button>&ndash;&gt;
-&lt;!&ndash;                </td>&ndash;&gt;
-
-                &lt;!&ndash;Вариант с открытием каждой позиции&ndash;&gt;
-&lt;!&ndash;                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.disciplineName}}</td>&ndash;&gt;
-&lt;!&ndash;                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.numOfWorkouts}}</td>&ndash;&gt;
-&lt;!&ndash;                <td ng-click="getTicketById(t.id)" data-bs-toggle="modal" data-bs-target="#exampleModalOrder">{{t.expired}}</td>&ndash;&gt;
-
-
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>-->
-
 <!-- Modal -->
+<!--Информация об абонементе-->
 <div class="modal fade" id="subscriptionInformationForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
@@ -203,9 +141,9 @@
                 <span><strong>Тренер</strong> - {{CurrentSub.trainer.name}}</span><br>
                 <span><strong>Количество занятий</strong> - {{CurrentSub.workoutCount}}</span><br>
                 <span><strong>Продолжительность занятия</strong> - {{CurrentSub.duration}}</span><br>
-                <span><strong>Стоимость абонемента</strong> - {{CurrentSub.price}}р.</span><br>
+                <span class="{{ifSubAvailable(CurrentSub.id)}}"><strong>Стоимость абонемента</strong> - {{CurrentSub.price}}р.</span><br>
 
-                <button class="form-control submit-button" ng-click="buySubscription(CurrentSub.id)">Приобрести абонемент</button>
+                <button class="form-control submit-button {{ifSubAvailable(CurrentSub.id)}}" ng-click="buySubscription(CurrentSub.id)">Приобрести абонемент</button>
 
             </div>
 
@@ -215,6 +153,24 @@
     </div>
 </div>
 
+<!--Предупреждение о невозможности приобретения абонемента незарегистрированным пользователям-->
+<div class="modal fade" id="alertNotAuthentication" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ml-auto col-lg-5 col-md-6 col-12">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+            </div>
+            <div class="modal-body">
+                <span>Покупка абонементов доступна только для зарегистрированных пользователей</span>
+                <div class="modal-footer container">
+                    <button class="form-control submit-button" ng-click="redirectAuthWindow()">Войти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Пример окна подписки-->
+<!--
 <div class="modal fade" id="membershipForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
@@ -253,4 +209,5 @@
         </div>
     </div>
 </div>
+-->
 

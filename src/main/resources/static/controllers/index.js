@@ -43,7 +43,7 @@
                     console.log("Время жизни токена истекло");
                     delete $localStorage.fitnessClubUser;
                     $http.defaults.headers.common.Authorization = '';
-                    $location.path('/')
+                    // $location.path('/')
                 } else {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.fitnessClubUser.token;
                     // console.log('Role: ' + payload.authority);
@@ -55,7 +55,8 @@
             } catch (e) {
             }
         } else {
-            $location.path('/auth');
+            delete $localStorage.fitnessClubUser;
+            // $location.path('/auth');
         }
     }
 })();
@@ -71,15 +72,18 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     let jwt = response.data.token;
                     let payload = JSON.parse(atob(jwt.split('.')[1]));
-                    $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
-                    $scope.setUserIn();
-                    $scope.closeModal('#modalAuth');
-                    // console.log('Role: ' + payload.authority);
-                    if (String(payload.authority) === String("admin")){
-                        // console.log("It's admin");
-                        $location.path('/admin');
+                    let currentTime = parseInt(new Date().getTime() / 1000);
+                    if (currentTime > payload.exp) {
+                        console.log("Время жизни токена истекло");
+                        delete $localStorage.fitnessClubUser;
+                        $http.defaults.headers.common.Authorization = '';
                     } else {
-                        $location.path('/');
+                        $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
+                        $scope.setUserIn();
+                        $scope.closeModal('#modalAuth');
+                        if (String(payload.authority) === String("admin")){
+                            $location.path('/admin');
+                        }
                     }
                 }
             }).catch(function (response) {
@@ -93,12 +97,27 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
         $http.post(contextPathAuthService + '/registration', $scope.reg)
             .then(function (response) {
                 if(response.data.token){
-                    console.log("Токен получен")
+/*                    console.log("Токен получен")
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.fitnessClubUser = {username: $scope.auth.keypass, token: response.data.token};
                     $scope.setUserIn();
                     $scope.closeModal('#modalAuth');
-                    $location.path('/');
+                    // $location.path('/');*/
+
+                    console.log("Токен получен");
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    let jwt = response.data.token;
+                    let payload = JSON.parse(atob(jwt.split('.')[1]));
+                    let currentTime = parseInt(new Date().getTime() / 1000);
+                    if (currentTime > payload.exp) {
+                        console.log("Время жизни токена истекло");
+                        delete $localStorage.fitnessClubUser;
+                        $http.defaults.headers.common.Authorization = '';
+                    } else {
+                        $localStorage.fitnessClubUser = {username: $scope.auth.username, token: response.data.token, role:payload.authority};
+                        $scope.setUserIn();
+                        $scope.closeModal('#modalAuth');
+                    }
                 }
             }).catch(function (response) {
             // console.log(response.data.message)
@@ -169,7 +188,7 @@ angular.module('fitnessClub').controller('indexController', function ($rootScope
         delete $localStorage.fitnessClubUser;
         $http.defaults.headers.common.Authorization = '';
         $scope.setUserOut();
-        $location.path('/');
+        // $location.path('/');
     }
 
     $scope.closeModal = function (modal){
