@@ -132,9 +132,9 @@
 /*	margin-top: 60px;*/
 /*}*/
 
-/*.timetable_filtering{*/
-/*	margin-top: 60px;*/
-/*}*/
+.timetable_filtering{
+	margin-top: 60px;
+}
 
 .tt_class
 {
@@ -201,6 +201,99 @@
 .form-label ~ input{
 	margin-top: 5px;
 }
+
+.class{
+	background: var(--dark-color);
+	color: var(--white-color);
+}
+
+.class .class-sticker{
+	color: var(--dark-color);
+}
+
+.class .block-title{
+	margin-top: 1rem;
+}
+
+
+/***************
+Страница информации
+***************/
+
+.info{
+	background: var(--dark-color);
+	padding: 5rem 0;
+}
+
+.info input{
+	background: var(--dark-color);
+	border-color: var(--white-color);
+	border: 1px solid;
+}
+
+.info input[readonly]{
+	background: var(--gray-dark);
+}
+
+.info input:focus{
+	border-color: var(--white-color);
+}
+
+.info input[readonly]:focus{
+	background: var(--gray-dark);
+	border-color: var(--white-color);
+	border: 1px solid;
+}
+
+.info input:focus{
+	background: var(--dark-color);
+	border-color: var(--white-color);
+	border: 2px solid;
+}
+.info button.submit-button{
+	background: var(--primary-color);
+	border-color: transparent;
+	color: var(--white-color);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: var(--h6-font-size);
+
+}
+
+.info button.submit-button:hover{
+	background: var(--white-color);
+	color: var(--primary-color);
+}
+
+.info button.reset-button{
+	background: var(--dark-color);
+	border-color: transparent;
+	color: var(--white-color);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: var(--h6-font-size);
+}
+
+.info button.reset-button:hover{
+	/*background: var(--white-color);*/
+	color: var(--primary-color);
+}
+
+hr{
+	border-color: var(--gray-color);
+}
+
+/************
+Footer
+*************/
+
+.site-footer{
+	background: var(--dark-color);
+}
+
+
+
+
 
 
 
