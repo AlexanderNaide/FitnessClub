@@ -15,7 +15,7 @@
 
 
     // SMOOTHSCROLL NAVBAR
-/*    $(function() {
+    $(function() {
       $('.navbar a, .hero-text a').on('click', function(event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
@@ -23,7 +23,7 @@
         }, 1000);
         event.preventDefault();
       });
-    });    */
+    });
   });
 
 

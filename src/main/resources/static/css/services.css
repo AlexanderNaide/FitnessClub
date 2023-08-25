@@ -291,6 +291,14 @@ Footer
 	background: var(--dark-color);
 }
 
+h1 span{
+	color: var(--primary-color);
+}
+
+h2 span{
+	color: var(--primary-color);
+}
+
 
 
 
