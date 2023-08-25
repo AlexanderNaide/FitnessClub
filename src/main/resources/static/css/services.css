@@ -194,5 +194,13 @@
 	border: 1px solid #f13a11;
 }
 
+.form-label{
+	margin-top: 20px;
+}
+
+.form-label ~ input{
+	margin-top: 5px;
+}
+
 
 

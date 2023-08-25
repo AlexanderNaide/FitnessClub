@@ -1,110 +1,72 @@
 <section class="contact section">
     <div class="container">
-        <div class="row">
-
             <form class="webform" id="userFilter" novalidate ng-submit="saveInformation()">
-
-                <div>
-                    <div class="form-group mb-3">
-                        <label class="">Полное имя (ФИО)</label>
-                        <input class="form-control" type="text" ng-model="UserInformation.username" id="userName" value="{{UserInformation.username}}" placeholder="{{UserInformation.username}}" title="Ваши Фамилия Имя Отчество">
-                    </div>
-                </div>
-
-
-                <input type="text" class="form-control" ng-model="reg.username" id="regUsername" placeholder="Логин" title="Придумайте Логин для входа">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group mb-3">
-                            <input type="password" class="form-control" ng-model="reg.password" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="Пароль" title="Придумайте пароль">
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Логин</label>
+                                <input class="form-control" type="text" ng-model="UserInformation.login" value="{{UserInformation.login}}" placeholder="{{UserInformation.login}}" readonly title="Логин пользователя при входе">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Полное имя (ФИО)</label>
+                                <input class="form-control" type="text" ng-model="UserInformation.username" id="userName" value="{{UserInformation.username}}" placeholder="{{UserInformation.username}}" title="Ваши Фамилия Имя Отчество">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group mb-3">
-                            <input type="password" class="form-control" ng-model="reg.confirmPassword" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="Подтверждение" title="Повторите ввод пароль">
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Номер Карты</label>
+                                <input class="form-control" type="text" ng-model="UserInformation.keypass" value="{{UserInformation.keypass}}" placeholder="{{UserInformation.keypass}}" readonly title="Номер клубной карты">
+                            </div>
                         </div>
+                        <div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Телефон</label>
+                                <input id="phone" class="form-control" type="text" ng-model="UserInformation.phone" ng-change="phoneMatching()" value="{{UserInformation.phone}}" placeholder="{{UserInformation.phone}}" title="Номер телефона">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Электронная почта</label>
+                                <input id="email" class="form-control" type="text" ng-model="UserInformation.email" ng-change="emailMatching()" value="{{UserInformation.email}}" placeholder="{{UserInformation.email}}" title="Адрес электронной почты">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="mr-auto ml-auto col-lg-5 col-md-6 col-12 text-center">
+                    <label class="form-label">Смена пароля</label>
+                </div>
+                <div class="row">
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Введите новый пароль</label>
+                            <input id="pass1" type="password" class="form-control" ng-model="UserInformation.password1" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="Пароль" title="Придумайте пароль">
+                        </div>
+                    </div>
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Повторите ввод</label>
+                            <input id="pass2" type="password" class="form-control" ng-model="UserInformation.password2" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="Подтверждение" title="Повторите ввод пароль">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <button class="form-control authorizationWindow btn custom-btn black-font-custom-btn" ng-click="resetChanges()" type="button">Сбросить</button>
+                    </div>
+                    <div class="ml-auto col-lg-5 col-md-6 col-12">
+                        <button class="form-control authorizationWindow submit-button" type="submit">Сохранить</button>
                     </div>
                 </div>
 
-                <div>
-                    <div class="form-group mb-3">
-                        <input id="phone" class="form-control" type="text" ng-model="reg.phone" ng-change="phoneMatching()" placeholder="Телефон" title="Номер телефона">
-                    </div>
-                </div>
-                <div>
-                    <div class="form-group mb-3">
-                        <input id="email" class="form-control" type="text" ng-model="reg.email" ng-change="emailMatching()" placeholder="Электронная почта" title="Адрес электронной почты">
-                    </div>
-                </div>
+<!--                <input type="text" class="form-control" ng-model="reg.username" id="regUsername" placeholder="Логин" title="Придумайте Логин для входа">-->
 
-                <div class="modal-footer container">
-                    <button class="form-control authorizationWindow btn custom-btn black-font-custom-btn" ng-click="getRegistrations()" type="button">Регистрация</button>
-                    <button class="form-control registrationWindow hidden btn custom-btn black-font-custom-btn" ng-click="getAuthorizations()" type="button">Авторизация</button>
-                    <button class="form-control authorizationWindow submit-button" ng-click="authentications() && closeModal('#modalAuth')">Войти</button>
-                    <button class="form-control registrationWindow hidden submit-button" ng-click="registrations() " type="button">Зарегистрироваться</button>
-                </div>
             </form>
-
-        </div>
     </div>
 </section>
-
-
-
-
-
-<!--<form id="userFilter" novalidate ng-submit="saveInformation()">-->
-
-<!--    <br>-->
-<!--    <h5> ФИО </h5>-->
-<!--    <label>-->
-<!--        <input id="userName" class="form-control" type="text" ng-model="UserInformation.username" value="{{UserInformation.username}}" placeholder="{{UserInformation.username}}">-->
-<!--    </label>-->
-
-<!--    <br>-->
-
-    <h5> Логин </h5>
-    <label>
-        <input class="form-control" type="text" ng-model="UserInformation.login" value="{{UserInformation.login}}" placeholder="{{UserInformation.login}}" readonly>
-    </label>
-
-    <br>
-
-    <h5> Номер Карты </h5>
-    <label>
-        <input class="form-control" type="text" ng-model="UserInformation.keypass" value="{{UserInformation.keypass}}" placeholder="{{UserInformation.keypass}}" readonly>
-    </label>
-
-    <br>
-
-    <h5> Электронная почта </h5>
-    <label>
-        <input id="email1" class="form-control" type="text" ng-model="UserInformation.email" ng-change="emailMatching()" value="{{UserInformation.email}}" placeholder="{{UserInformation.email}}">
-    </label>
-
-    <br>
-
-    <h5> Телефон </h5>
-    <label>
-        <input id="phone1" class="form-control" type="text" ng-model="UserInformation.phone" ng-change="phoneMatching()" value="{{UserInformation.phone}}" placeholder="{{UserInformation.phone}}">
-    </label>
-
-    <hr>
-
-    <h5> Изменить пароль
-    </h5>
-
-    <label> Введите новый пароль
-        <input id="pass1" class="form-control" type="password" ng-model="UserInformation.password1" ng-change="passwordMatching()" placeholder="" autocomplete="new-password">
-    </label>
-
-    <label style="margin-left: 60px"> Повторите ввод нового пароля
-        <input id="pass2" class="form-control" type="password" ng-model="UserInformation.password2" ng-change="passwordMatching()" placeholder="" autocomplete="off">
-    </label>
-
-    <hr>
-
-    <button type="button" class="btn btn-secondary" ng-click="resetChanges()">Сбросить</button>
-    <button class="btn btn-success" type="submit">Сохранить</button>
-
-</form>

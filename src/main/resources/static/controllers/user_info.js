@@ -67,7 +67,8 @@ angular.module('fitnessClub').controller('userInfoController', function ($scope,
 
     $scope.phoneMatching = function (){
         if ($scope.UserInformation.phone !== $scope.UserInformation.phoneOld){
-            const re = /^[\d\+][\d\(\)\ -]{7,14}\d$/;
+            // const re = /^[\d\+][\d\(\)\ -]{7,14}\d$/;
+            const re = /^[\+]?[0-9]{1,3}[ ]?[( -]?[0-9]{3}[) -]?[ ]?[ -]?[0-9]{3}[ -]?[0-9]{2}[ -]?[0-9]{2}$/im;
             let valid = re.test($scope.UserInformation.phone);
             if (valid) {
                 $('#phone').removeClass('border-danger').addClass('border-success');
