@@ -71,24 +71,6 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         });
     };
 
-/*    $scope.ifSubAvailable = function (id) {
-        // console.log("запрос");
-        if ($scope.ifUserAvailable()) {
-            let result = false;
-            if ($scope.userSubscriptionList !== undefined && $scope.userSubscriptionList.length > 0) {
-                for (let sub of $scope.userSubscriptionList) {
-                    if (sub.id === id) {
-                        result = true;
-                        break;
-                    }
-                }
-            }
-            return result ? "hidden" : "";
-        } else {
-            return "";
-        }
-    };*/
-
     $scope.ifSubAvailableNative = function (id) {
         if ($scope.ifUserAvailable()) {
             if ($scope.userSubscriptionList !== undefined && $scope.userSubscriptionList.length > 0) {
@@ -103,7 +85,9 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         }
     };
 
-    $scope.loadUserSubscriptions();
+    if($scope.ifUserAvailable()){
+        $scope.loadUserSubscriptions();
+    }
     $scope.getAllSubscriptions();
     $scope.setActiveLinc();
 

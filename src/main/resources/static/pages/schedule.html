@@ -73,35 +73,55 @@
 <!-- SCRIPTS -->
 <script src="../js/custom.js"></script>
 
+<div class="modal fade" id="modalClassInfo" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
 
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="x" ng-click="closeModal('#modalClassInfo')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
 
-<div class="modal fade" id="modalClassInfo" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<!--                <img src={{CurrentEvent.image}} class="img-fluid" alt="Class">-->
+                <h5 class="modal-title">{{CurrentEvent.date}} {{CurrentEvent.startTime}}</h5>
+                <h3 class="modal-title" id="membershipFormLabel2">{{CurrentEvent.discipline.name}}</h3>
+
+            </div>
+
+            <div class="modal-body">
+                <span>{{CurrentEvent.discipline.description}}</span><br>
+                <span><strong>Тренер</strong> - {{CurrentEvent.trainer.name}}</span><br>
+                <span>{{CurrentEvent.trainer.description}}</span><br>
+                <span><strong>Место</strong> - {{CurrentEvent.hall.name}}</span><br>
+                <span>{{CurrentEvent.hall.description}}</span><br>
+                <span><strong>Продолжительность занятия</strong> - {{CurrentEvent.duration}}</span><br>
+                <span>{{CurrentEvent.comment}}</span><br>
+
+                <button type="button" class="non_user form-control submit-button" ng-click="redirectAuthWindow()">Войти, чтобы записаться</button>
+                <strong class="non_sub hidden">Для записи на это занятие необходимо приобрести абонемент.</strong>
+                <button type="button" class="non_event form-control submit-button hidden" ng-click="addEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Запись</button>
+                <button type="button" class="there_event form-control submit-button hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, '#modalClassInfo')">Отменить запись</button>
+
+            </div>
+
+            <div class="modal-footer"></div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="alertNotAuthentication" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ml-auto col-lg-5 col-md-6 col-12">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
-                <h5 class="modal-title">{{CurrentEvent.date}} {{CurrentEvent.startTime}}</h5>
             </div>
-            <div class="modal-body d-flex flex-column">
-                <h6 class="bold">{{CurrentEvent.discipline.name}}</h6>
-                <h6>{{CurrentEvent.discipline.description}}</h6>
-                <h6 class="bold">{{CurrentEvent.trainer.name}}</h6>
-                <h6>{{CurrentEvent.trainer.description}}</h6>
-                <h6 class="bold">{{CurrentEvent.hall.name}}</h6>
-                <h6>{{CurrentEvent.hall.description}}</h6>
-                <h6>{{CurrentEvent.hall.address}}</h6>
-                <div class="d-flex justify-content-center">
-                    <div class="d-flex flex-column cont content_center">
-                                <h6 class="bold">Продолжительность {{CurrentEvent.duration}}</h6>
-                                <h6>{{CurrentEvent.comment}}</h6>
-                    </div>
+            <div class="modal-body">
+                <span>Запись на занятия доступна только для зарегистрированных пользователей</span>
+                <div class="modal-footer container">
+                    <button class="form-control submit-button" ng-click="redirectAuthWindow()">Войти</button>
                 </div>
-            </div>
-
-            <div class="modal-footer d-flex justify-content-around">
-                <h5 class="non_sub hidden">Для записи на это занятие необходимо приобрести абонемент.</h5>
-                <button type="button" class="there_event btn btn-success hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, '#modalClassInfo')">Отменить запись</button>
-                <button type="button" class="non_event btn btn-success hidden" ng-click="addEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Запись</button>
-                <button type="button" class="btn btn-secondary" ng-click="closeModal('#modalClassInfo')">Закрыть</button>
             </div>
         </div>
     </div>
