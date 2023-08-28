@@ -1,6 +1,14 @@
-angular.module('fitnessClub').controller('servicesController', function ($scope, $http) {
+angular.module('fitnessClub').controller('servicesController', function ($scope, $http, $localStorage) {
     const contextPathSubscriptionService = 'http://localhost:5555/subscriptions/api/v1/subscriptions';
     const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
+
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.class-linc');
+        $button.addClass('active');
+    };
+
 
     $scope.loadUserSubscriptions = function () {
         $http({
@@ -8,7 +16,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data)
-            $scope.subscriptionDtoList = response.data;
+            $scope.userSubscriptionList = response.data;
         });
     };
 
@@ -17,20 +25,25 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             url: contextPathSubscriptionService + '/get-all',
             method: 'GET'
         }).then(function (response) {
-            // console.log(response.data)
-            $scope.addSubscriptionList = response.data;
+            console.log(response.data)
+            $scope.allSubscriptionList = response.data;
         });
     };
 
     $scope.buySubscription = function (id){
-        $http({
-            url: contextPathSubscriptionService + "/buy/" + id,
-            method: 'POST'
-        }).then(function () {
-            $scope.loadUserSubscriptions();
-        }).catch(function (response) {
-            alert(response.data.message)
-        });
+        if ($scope.ifUserAvailable()){
+            $http({
+                url: contextPathSubscriptionService + "/buy/" + id,
+                method: 'POST'
+            }).then(function () {
+                $scope.loadUserSubscriptions();
+            }).catch(function (response) {
+                alert(response.data.message)
+            });
+        } else {
+            $scope.closeModal($('#subscriptionInformationForm'));
+            $('#alertNotAuthentication').modal('toggle');
+        }
     };
 
     // Запрос на удаление абонемента - пока не нужен
@@ -43,30 +56,60 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
         });
     };*/
 
-
-    // Запрос подробной информации об абонементе.
-/*    $scope.getTicketById = function (id){
+    $scope.getSubInfo = function (id) {
         $http({
-            url: contextPathSubscriptionService + "/" + id,
+            url: contextPathSubscriptionService + "/" + id + "/info",
             method: 'GET'
         }).then(function (response) {
-            // console.log(response.data);
-            $scope.currentSubscription = response.data;
+            console.log(response.data);
+            $scope.CurrentSub = response.data;
+            $('#subscriptionInformationForm').modal('toggle');
         }).catch(function (response) {
             alert(response.data.message);
         });
-    };*/
-
-    $scope.isAdded = function (id){
-        let added = false;
-        for (const sub of $scope.subscriptionDtoList) {
-            if (sub.id === id){
-                added = true;
-                break;
-            }
-        }
-        return added;
     };
 
-    $scope.loadUserSubscriptions();
+    $scope.ifMainSubscriptionAvailable = function () {
+        if ($scope.ifUserAvailable() && $scope.userSubscriptionList !== undefined){
+            return $scope.userSubscriptionList.length > 0 ? "" : "hidden";
+        } else {
+            return "hidden";
+        }
+    };
+
+    $scope.redirectAuthWindow = function (){
+        $scope.closeModal($('#alertNotAuthentication'));
+        $('#modalAuth').modal('toggle');
+    }
+
+    $scope.closeModal = function (modal){
+        $(modal).modal('hide');
+    };
+
+    $scope.ifUserAvailable = function (){
+        return !!$localStorage.fitnessClubUser;
+    };
+
+    $scope.ifSubAvailable = function (id){
+        if ($scope.ifUserAvailable()){
+            let result = false;
+            if($scope.userSubscriptionList !== undefined){
+                for (let sub of $scope.userSubscriptionList) {
+                    if (sub.id === id){
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            return result ? "hidden" : "";
+        } else {
+            return "";
+        }
+    };
+
+    $scope.setActiveLinc();
+    if($scope.ifUserAvailable()){
+        $scope.loadUserSubscriptions();
+    }
+    $scope.getAllSubscriptions();
 });

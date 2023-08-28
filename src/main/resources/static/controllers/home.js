@@ -1,108 +1,94 @@
-angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
-    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients/accounts';
+angular.module('fitnessClub').controller('homeController', function ($scope, $http, $localStorage) {
+    const contextPathSubscriptionService = 'http://localhost:5555/subscriptions/api/v1/subscriptions';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
-    $scope.loadInformation = function () {
+    $scope.setActiveLinc = function (){
+        const $buttonGroup = $('.nav-item');
+        $buttonGroup.find('.active').removeClass('active');
+        const $button = $('.home-linc');
+        $button.addClass('active');
+    };
+
+    $scope.getAllSubscriptions = function () {
         $http({
-            url: contextPathAccountService + '/info',
+            url: contextPathSubscriptionService + '/get-all',
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data)
+            $scope.allSubscriptionList = response.data;
+        });
+    };
+
+    $scope.getSubInfo = function (id) {
+        $http({
+            url: contextPathSubscriptionService + "/" + id + "/info",
             method: 'GET'
         }).then(function (response) {
             // console.log(response.data);
-            $scope.UserInformation = response.data;
-            $scope.UserInformation.usernameOld = $scope.UserInformation.username;
-            $scope.UserInformation.phoneOld = $scope.UserInformation.phone;
-            $scope.UserInformation.emailOld = $scope.UserInformation.email;
-
-        });
-    };
-
-    $scope.saveInformation = function () {
-        let setUserInformation = {
-            username: $scope.UserInformation.username,
-            password: $scope.UserInformation.password,
-            email: $scope.UserInformation.email,
-            phone: $scope.UserInformation.phone,
-        };
-        clearClass();
-        $http({
-            url: contextPathAccountService + '/info/update',
-            method: 'POST',
-            data: setUserInformation
-        }).then(function (response) {
-            $scope.loadInformation();
+            $scope.CurrentSub = response.data;
+            $('#subscriptionInformationForm').modal('toggle');
         }).catch(function (response) {
-            alert(response.data.message)
+            alert(response.data.message);
         });
     };
 
-    $scope.passwordMatching = function (){
-        let password1 = $scope.UserInformation.password1;
-        let password2 = $scope.UserInformation.password2;
-        if (password1 === undefined || password1 === ''){
-            $('#pass1').removeClass('border-success').addClass('border-danger');
+    $scope.buySubscription = function (id){
+        if ($scope.ifUserAvailable()){
+            $http({
+                url: contextPathSubscriptionService + "/buy/" + id,
+                method: 'POST'
+            }).then(function () {
+                $scope.loadUserSubscriptions();
+            }).catch(function (response) {
+                alert(response.data.message)
+            });
         } else {
-            $('#pass1').removeClass('border-danger');
+            $scope.closeModal($('#subscriptionInformationForm'));
+            $('#alertNotAuthentication').modal('toggle');
         }
-        if (password2 === undefined || password2 === ''){
-            $('#pass2').removeClass('border-success').addClass('border-danger');
-        } else {
-            $('#pass2').removeClass('border-danger');
-        }
-        if (password1 !== password2){
-            $('#pass1').removeClass('border-success');
-            $('#pass2').addClass('border-danger');
-        }
-        if (password1 === password2){
-            $('#pass1').removeClass('border-danger').addClass('border-success');
-            $('#pass2').removeClass('border-danger').addClass('border-success');
-            $scope.UserInformation.password = password1;
-        }
-    }
-
-    $scope.phoneMatching = function (){
-        if ($scope.UserInformation.phone !== $scope.UserInformation.phoneOld){
-            const re = /^[\d\+][\d\(\)\ -]{7,14}\d$/;
-            let valid = re.test($scope.UserInformation.phone);
-            if (valid) {
-                $('#phone').removeClass('border-danger').addClass('border-success');
-            } else {
-                $('#phone').removeClass('border-success').addClass('border-danger');
-            }
-        } else {
-            $('#phone').removeClass('border-danger').removeClass('border-success');
-        }
-    }
-
-    $scope.emailMatching = function (){
-        if($scope.UserInformation.email !== $scope.UserInformation.emailOld){
-            const re = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
-            let valid = re.test($scope.UserInformation.email);
-            if (valid) {
-                $('#email').removeClass('border-danger').addClass('border-success');
-            } else {
-                $('#email').removeClass('border-success').addClass('border-danger');
-            }
-        } else {
-            $('#email').removeClass('border-danger').removeClass('border-success');
-        }
-    }
-
-    $scope.resetChanges = function () {
-        $scope.UserInformation.password1 = null;
-        $scope.UserInformation.password2 = null;
-        $scope.UserInformation.username = $scope.UserInformation.usernameOld;
-        $scope.UserInformation.phone = $scope.UserInformation.phoneOld;
-        $scope.UserInformation.email = $scope.UserInformation.emailOld;
-        clearClass();
     };
 
-    function clearClass(){
-        $('#phone').removeClass('border-danger').removeClass('border-success');
-        $('#email').removeClass('border-danger').removeClass('border-success');
-        $('#pass1').removeClass('border-danger').removeClass('border-success');
-        $('#pass2').removeClass('border-danger').removeClass('border-success');
-        $('#userName').removeClass('border-danger').removeClass('border-success');
+    $scope.redirectAuthWindow = function (){
+        $scope.closeModal($('#alertNotAuthentication'));
+        $('#modalAuth').modal('toggle');
     }
 
-    $scope.loadInformation();
+    $scope.closeModal = function (modal){
+        $(modal).modal('hide');
+    };
+
+    $scope.ifUserAvailable = function (){
+        return !!$localStorage.fitnessClubUser;
+    };
+
+    $scope.loadUserSubscriptions = function () {
+        $http({
+            url: contextPathAccountService + '/subscriptions/info',
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.userSubscriptionList = response.data;
+        });
+    };
+
+    $scope.ifSubAvailableNative = function (id) {
+        if ($scope.ifUserAvailable()) {
+            if ($scope.userSubscriptionList !== undefined && $scope.userSubscriptionList.length > 0) {
+                for (let sub of $scope.userSubscriptionList) {
+                    if (sub.id === id) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            return false;
+        }
+    };
+
+    if($scope.ifUserAvailable()){
+        $scope.loadUserSubscriptions();
+    }
+    $scope.getAllSubscriptions();
+    $scope.setActiveLinc();
 
 });

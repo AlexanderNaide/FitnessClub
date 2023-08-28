@@ -1,4 +1,4 @@
-package ru.gb.testback.model;
+package ru.gb.testback.model.subscriptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +17,9 @@ public class SubscriptionResponse {
     private Integer workoutCount;
     private Integer daysToExpire;
     private BigDecimal price;
+
+    // Необходимо добавить на общем бэке:
+    private String category;
+    private String trainer;
+    private String image;
 }

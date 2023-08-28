@@ -1,0 +1,70 @@
+<div>
+    <form id="auth" class="w-50 p-3" novalidate style="margin-left: auto; margin-right: auto">
+        <div class="modal-header">
+<!--            Ой не помню, для чего этот класс был - проверим без него, потом удалим-->
+<!--            <h5 class="modal-title">{{modalStatus}}</h5>-->
+            <h5>{{modalStatus}}</h5>
+        </div>
+
+        <div class="modal-body authorizationWindow">
+            <div class="form-group mb-3">
+                <label for="logUsername">Логин</label>
+                <input class="form-control" type="text" ng-model="auth.username" id="logUsername">
+            </div>
+            <div class="form-group mb-3">
+                <label for="logPassword">Пароль</label>
+                <input class="form-control" type="text" ng-model="auth.password" id="logPassword">
+            </div>
+        </div>
+
+        <div class="modal-body registrationWindow hidden">
+            <div>
+                <div class="form-group mb-3">
+                    <label for="regUsername">Логин</label>
+                    <input class="form-control" type="text" ng-model="reg.username" id="regUsername" placeholder="login">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group mb-3">
+                        <label for="regPassword">Пароль</label>
+                        <input class="form-control" type="password" ng-model="reg.password" id="regPassword" ng-change="passwordMatching()" autocomplete="new-password" placeholder="password">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword">Подтверждение пароля</label>
+                        <input class="form-control" type="password" ng-model="reg.confirmPassword" id="confirmPassword" ng-change="passwordMatching()" autocomplete="off" placeholder="confirm password">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-group mb-3">
+                    <label for="realName">Полное имя</label>
+                    <input class="form-control" type="text" ng-model="auth.realName" id="realName">
+                </div>
+            </div>
+            <div>
+                <div class="form-group mb-3">
+                    <label for="phone">Телефон</label>
+                    <input id="phone" class="form-control" type="text" ng-model="reg.phone" ng-change="phoneMatching()" placeholder="+7 900 000 0000">
+                </div>
+            </div>
+            <div>
+                <div class="form-group mb-3">
+                    <label for="email">Электронная почта</label>
+                    <input id="email" class="form-control" type="text" ng-model="reg.email" ng-change="emailMatching()" placeholder="user@mail.ru">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal-footer d-flex justify-content-between">
+            <button class="btn btn-primary authorizationWindow" ng-click="getRegistrations()" type="button">Регистрация</button>
+            <button class="btn btn-primary registrationWindow hidden" ng-click="getAuthorizations()" type="button">Авторизация</button>
+            <button class="btn btn-success authorizationWindow" ng-click="authentications()">Войти</button>
+            <button class="btn btn-success registrationWindow hidden" ng-click="registrations()" type="button">Зарегистрироваться</button>
+        </div>
+    </form>
+</div>

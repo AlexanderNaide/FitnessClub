@@ -1,84 +1,127 @@
+<section class="schedule section" id="class">
+        <div class="container">
+            <div class="row">
 
-<div class="timetable_filtering">
-    <div class="button-group row justify-content-md-center" data-filter-group="dayOfWeek">
-        <div class="sticker all item_filter_btn active" data-filter="">
-            <div class="tt_class_title">ВСЕ ЗАЛЫ</div>
-        </div>
-        <div class="sticker item_filter_btn active {{k}}" data-filter=".{{k}}" ng-repeat="(k, v) in scheduleDto.halls">
-            <div class="tt_class_title">{{v}}</div>
-        </div>
-    </div>
+                <div class="col-lg-12 col-12 text-center">
+                    <h2 class="text-white" data-aos="fade-up">Расписание тренировок</h2>
+                    <h6 data-aos="fade-up" data-aos-delay="200">Еженедельное расписание в клубе</h6>
+                </div>
 
-    <div class="button-group row justify-content-md-center" data-filter-group="mainSchedule">
-        <div class="signature item_filter_btn active" data-filter="">
-            <div class="tt_class_title">Расписание клуба</div>
+                <div class="timetable_filtering col-lg-12 col-12 text-center">
+                    <div class="button-group row justify-content-md-center" data-filter-group="dayOfWeek" data-aos="fade-up" data-aos-delay="300">
+                        <div class="sticker all item_filter_btn" data-filter="">
+                            <div class="tt_class_title">ВСЕ ЗАЛЫ</div>
+                        </div>
+                        <div class="sticker item_filter_btn {{k}}" data-filter=".{{k}}" ng-repeat="(k, v) in scheduleDto.halls">
+                            <div class="tt_class_title">{{v}}</div>
+                        </div>
+                    </div>
+
+                    <div class="button-group row justify-content-md-center" data-filter-group="mainSchedule" data-aos="fade-up" data-aos-delay="400">
+                        <div class="signature item_filter_btn active" data-filter="">
+                            <div class="signature_btn tt_class_title pointer ">Расписание клуба</div>
+                        </div>
+                        <div class="signature item_filter_btn" data-filter=".main">
+                            <div class="signature_btn tt_class_title pointer">Моё расписание</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <table class="table table-bordered table-responsive schedule-table"  data-aos="fade-up" data-aos-delay="500">
+
+                    <thead class="thead-light">
+                        <th><i class="fa fa-calendar"></i></th>
+                        <th ng-repeat="day in scheduleDto.daysOFWeek">{{day}}</th>
+                    </thead>
+                    <tbody>
+                        <tr class="body_string" ng-repeat="time in scheduleDto.trainingStartTime">
+                            <td class="time_grid">{{time}}</td>
+<!--                            <td class="class_col grid" ng-repeat="day in scheduleDto.events">-->
+                            <td class="grid" ng-repeat="day in scheduleDto.events">
+<!--                                <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >-->
+                                <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >
+                                    <div class="row">
+                                        <div class="place" ng-click="getEventInformation(class.id)"></div>
+                                        <div class="tt_class_button pointer add_button" title="Записаться" ng-click="addEvent(class.id, class.discipline)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-plus" viewBox="4 4 8 8">
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="tt_class_button pointer del_button" title="Отменить" ng-click="deleteEvent(class.id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-dash" viewBox="4 4 8 8">
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="tt_class_title" ng-click="getEventInformation(class.id)" >{{class.discipline}}</div>
+                                    <div class="tt_class_message" ng-click="getEventInformation(class.id)">{{class.comments }}</div>
+                                    <div class="tt_class_instructor" ng-click="getEventInformation(class.id)">{{class.coachName}}</div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
         </div>
-        <div class="signature item_filter_btn" data-filter=".main">
-            <div class="tt_class_title">Моё расписание</div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="../js/custom.js"></script>
+
+<div class="modal fade" id="modalClassInfo" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="x" ng-click="closeModal('#modalClassInfo')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+
+<!--                <img src={{CurrentEvent.image}} class="img-fluid" alt="Class">-->
+                <h5 class="modal-title">{{CurrentEvent.date}} {{CurrentEvent.startTime}}</h5>
+                <h3 class="modal-title" id="membershipFormLabel2">{{CurrentEvent.discipline.name}}</h3>
+
+            </div>
+
+            <div class="modal-body">
+                <span>{{CurrentEvent.discipline.description}}</span><br>
+                <span><strong>Тренер</strong> - {{CurrentEvent.trainer.name}}</span><br>
+                <span>{{CurrentEvent.trainer.description}}</span><br>
+                <span><strong>Место</strong> - {{CurrentEvent.hall.name}}</span><br>
+                <span>{{CurrentEvent.hall.description}}</span><br>
+                <span><strong>Продолжительность занятия</strong> - {{CurrentEvent.duration}}</span><br>
+                <span>{{CurrentEvent.comment}}</span><br>
+
+                <button type="button" class="non_user form-control submit-button" ng-click="redirectAuthWindow()">Войти, чтобы записаться</button>
+                <strong class="non_sub hidden">Для записи на это занятие необходимо приобрести абонемент.</strong>
+                <button type="button" class="non_event form-control submit-button hidden" ng-click="addEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Запись</button>
+                <button type="button" class="there_event form-control submit-button hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, '#modalClassInfo')">Отменить запись</button>
+
+            </div>
+
+            <div class="modal-footer"></div>
+
         </div>
     </div>
 </div>
-<table class="schedule_table">
-    <tr class="head_string">
-        <td></td>
-        <td ng-repeat="day in scheduleDto.daysOFWeek">
-            <div class="collDay" >
-                {{day}}
-            </div>
-        </td>
-    </tr>
-    <tr class="body_string" ng-repeat="time in scheduleDto.trainingStartTime">
-        <td class="time_grid">{{time}}</td>
-        <td class="class_col grid" ng-repeat="day in scheduleDto.events">
-            <div class="class_grid {{class.hall}} {{isMainClass(class.id)}}" ng-repeat="class in day.eventsOfADay" ng-if="class.startTime == time" >
-                <div class="row">
-                    <div class="place" ng-click="getEventInformation(class.id)"></div>
-                    <div class="tt_class_button pointer add_button" title="Записаться" ng-click="addEvent(class.id, class.discipline)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-plus" viewBox="4 4 8 8">
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg>
-                    </div>
-                    <div class="tt_class_button pointer del_button" title="Отменить" ng-click="deleteEvent(class.id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-dash" viewBox="4 4 8 8">
-                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="tt_class_title" ng-click="getEventInformation(class.id)" >{{class.discipline}}</div>
-                <div class="tt_class_message" ng-click="getEventInformation(class.id)">{{class.comments }}</div>
-                <div class="tt_class_instructor" ng-click="getEventInformation(class.id)">{{class.coachName}}</div>
-            </div>
-        </td>
-    </tr>
-</table>
 
-<div class="modal fade" id="modalClassInfo" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="alertNotAuthentication" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ml-auto col-lg-5 col-md-6 col-12">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
-                <h5 class="modal-title">{{CurrentEvent.date}} {{CurrentEvent.startTime}}</h5>
             </div>
-            <div class="modal-body d-flex flex-column">
-                <h6 class="bold">{{CurrentEvent.discipline.name}}</h6>
-                <h6>{{CurrentEvent.discipline.description}}</h6>
-                <h6 class="bold">{{CurrentEvent.trainer.name}}</h6>
-                <h6>{{CurrentEvent.trainer.description}}</h6>
-                <h6 class="bold">{{CurrentEvent.hall.name}}</h6>
-                <h6>{{CurrentEvent.hall.description}}</h6>
-                <h6>{{CurrentEvent.hall.address}}</h6>
-                <div class="d-flex justify-content-center">
-                    <div class="d-flex flex-column cont content_center">
-                                <h6 class="bold">{{CurrentEvent.duration}}</h6>
-                                <h6>{{CurrentEvent.comment}}</h6>
-                    </div>
+            <div class="modal-body">
+                <span>Запись на занятия доступна только для зарегистрированных пользователей</span>
+                <div class="modal-footer container">
+                    <button class="form-control submit-button" ng-click="redirectAuthWindow()">Войти</button>
                 </div>
-            </div>
-
-            <div class="modal-footer d-flex justify-content-around">
-                <h5 class="non_sub hidden">Для записи на это занятие необходимо приобрести абонемент.</h5>
-                <button type="button" class="there_event btn btn-success hidden" ng-click="deleteEventOnModalInfo(CurrentEvent.id, '#modalClassInfo')">Отменить запись</button>
-                <button type="button" class="non_event btn btn-success hidden" ng-click="addEventOnModalInfo(CurrentEvent.id, CurrentEvent.discipline.name, '#modalClassInfo')">Запись</button>
-                <button type="button" class="btn btn-secondary" ng-click="closeModal('#modalClassInfo')">Закрыть</button>
             </div>
         </div>
     </div>

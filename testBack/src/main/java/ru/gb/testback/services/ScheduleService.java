@@ -2,7 +2,6 @@ package ru.gb.testback.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.testback.model.SubscriptionDto;
 import ru.gb.testback.model.clubEvents.*;
 import ru.gb.testback.repositories.SchedulesRepository;
 
@@ -66,10 +65,6 @@ public class ScheduleService {
         return weekSchedule;
     }
 
-    public List<SubscriptionDto> getUserSubscriptionList() {
-        return subscriptionsService.getUserSubscriptionList();
-    }
-
     public void addEventForUser(Long id) {
         if(userEvents == null){
             userEvents = new HashMap<>();
@@ -90,5 +85,9 @@ public class ScheduleService {
 
     public String findDescriptionByTitle(String title){
         return schedulesRepository.findDescriptionByTitle(title);
+    }
+
+    public ClubEventResponse findEventResponseByTitle(String title){
+        return schedulesRepository.findEventResponseByTitle(title);
     }
 }
