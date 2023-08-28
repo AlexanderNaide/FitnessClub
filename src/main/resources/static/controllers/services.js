@@ -25,7 +25,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
             url: contextPathSubscriptionService + '/get-all',
             method: 'GET'
         }).then(function (response) {
-            // console.log(response.data)
+            console.log(response.data)
             $scope.allSubscriptionList = response.data;
         });
     };

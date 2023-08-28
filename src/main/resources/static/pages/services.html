@@ -6,7 +6,8 @@
                 <h2 data-aos="fade-up" data-aos-delay="200">Активные занятия</h2>
             </div>
 
-            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 0" ng-click="getSubInfo(sub.id)">
+<!--            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 0" ng-click="getSubInfo(sub.id)">-->
+            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in userSubscriptionList" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -22,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
+            <!--<div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -36,9 +37,9 @@
                         <span><strong>Количество занятий</strong> - {{sub.workoutCount}}</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
-            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
+            <!--<div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in userSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src="{{sub.image}}" class="img-fluid" alt="Class">
 
@@ -52,7 +53,7 @@
                         <span><strong>Количество занятий</strong> - {{sub.workoutCount}}</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         <div class="row">
@@ -63,7 +64,8 @@
 
             </div>
 
-            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 0" ng-click="getSubInfo(sub.id)">
+<!--            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 0" ng-click="getSubInfo(sub.id)">-->
+            <div class="class-sticker col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="400" ng-repeat="sub in allSubscriptionList" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src={{sub.image}} class="img-fluid" alt="Class">
 
@@ -79,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
+            <!--<div class="class-sticker mt-5 mt-lg-0 mt-md-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="500"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 1" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src={{sub.image}} class="img-fluid" alt="Class">
 
@@ -93,9 +95,9 @@
                         <span><strong>Количество занятий</strong> - {{sub.workoutCount}}</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
-            <div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
+            <!--<div class="class-sticker mt-5 mt-lg-0 col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="600"  ng-repeat="sub in allSubscriptionList" ng-if="sub.id % 3 == 2" ng-click="getSubInfo(sub.id)">
                 <div class="class-thumb">
                     <img src={{sub.image}} class="img-fluid" alt="Class">
 
@@ -109,7 +111,7 @@
                         <span><strong>Количество занятий</strong> - {{sub.workoutCount}}</span>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>
