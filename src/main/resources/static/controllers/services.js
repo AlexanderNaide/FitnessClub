@@ -70,7 +70,7 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
     };
 
     $scope.ifMainSubscriptionAvailable = function () {
-        if ($scope.ifUserAvailable()){
+        if ($scope.ifUserAvailable() && $scope.userSubscriptionList !== undefined){
             return $scope.userSubscriptionList.length > 0 ? "" : "hidden";
         } else {
             return "hidden";
@@ -93,10 +93,12 @@ angular.module('fitnessClub').controller('servicesController', function ($scope,
     $scope.ifSubAvailable = function (id){
         if ($scope.ifUserAvailable()){
             let result = false;
-            for (let sub of $scope.userSubscriptionList) {
-                if (sub.id === id){
-                    result = true;
-                    break;
+            if($scope.userSubscriptionList !== undefined){
+                for (let sub of $scope.userSubscriptionList) {
+                    if (sub.id === id){
+                        result = true;
+                        break;
+                    }
                 }
             }
             return result ? "hidden" : "";

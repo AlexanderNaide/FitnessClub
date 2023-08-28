@@ -1,5 +1,6 @@
-angular.module('fitnessClub').controller('homeController', function ($scope, $http) {
+angular.module('fitnessClub').controller('homeController', function ($scope, $http, $localStorage) {
     const contextPathSubscriptionService = 'http://localhost:5555/subscriptions/api/v1/subscriptions';
+    const contextPathAccountService = 'http://localhost:5555/accounts/api/v1/clients';
 
     $scope.setActiveLinc = function (){
         const $buttonGroup = $('.nav-item');
@@ -23,7 +24,7 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
             url: contextPathSubscriptionService + "/" + id + "/info",
             method: 'GET'
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             $scope.CurrentSub = response.data;
             $('#subscriptionInformationForm').modal('toggle');
         }).catch(function (response) {
@@ -60,21 +61,49 @@ angular.module('fitnessClub').controller('homeController', function ($scope, $ht
         return !!$localStorage.fitnessClubUser;
     };
 
-    $scope.ifSubAvailable = function (id){
-        if ($scope.ifUserAvailable()){
+    $scope.loadUserSubscriptions = function () {
+        $http({
+            url: contextPathAccountService + '/subscriptions/info',
+            method: 'GET'
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.userSubscriptionList = response.data;
+        });
+    };
+
+/*    $scope.ifSubAvailable = function (id) {
+        // console.log("запрос");
+        if ($scope.ifUserAvailable()) {
             let result = false;
-            for (let sub of $scope.userSubscriptionList) {
-                if (sub.id === id){
-                    result = true;
-                    break;
+            if ($scope.userSubscriptionList !== undefined && $scope.userSubscriptionList.length > 0) {
+                for (let sub of $scope.userSubscriptionList) {
+                    if (sub.id === id) {
+                        result = true;
+                        break;
+                    }
                 }
             }
             return result ? "hidden" : "";
         } else {
             return "";
         }
+    };*/
+
+    $scope.ifSubAvailableNative = function (id) {
+        if ($scope.ifUserAvailable()) {
+            if ($scope.userSubscriptionList !== undefined && $scope.userSubscriptionList.length > 0) {
+                for (let sub of $scope.userSubscriptionList) {
+                    if (sub.id === id) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            return false;
+        }
     };
 
+    $scope.loadUserSubscriptions();
     $scope.getAllSubscriptions();
     $scope.setActiveLinc();
 
