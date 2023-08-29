@@ -2,7 +2,7 @@ package ru.gb.fitnessclub_backservice.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.gb.fitnessclub_backservice.model.entities.User;
+import ru.gb.fitnessclub_backservice.model.entities.userStructure.User;
 import ru.gb.fitnessclub_backservice.repositories.UserRepository;
 
 import java.util.Optional;

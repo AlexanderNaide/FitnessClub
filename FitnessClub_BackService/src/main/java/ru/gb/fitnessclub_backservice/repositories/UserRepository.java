@@ -1,11 +1,8 @@
 package ru.gb.fitnessclub_backservice.repositories;
 
-import lombok.Value;
-import org.hibernate.query.NativeQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.gb.fitnessclub_backservice.model.entities.User;
+import ru.gb.fitnessclub_backservice.model.entities.userStructure.User;
 
 import java.util.Optional;
 
