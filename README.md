@@ -33,6 +33,7 @@
 - Spring boot
 - Flyway
 - Postgresql
+- Angular JS
 
 # Порядок запуска
 
@@ -45,56 +46,60 @@
 - password: 123
 
 Далее требуется запустить все сервисы приложения (в любом порядке)
+- [Front service](https://github.com/AlexanderNaide/FitnessClub)
 - [Gateway service](https://github.com/NikitaLubimov/GateWay)
 - [Authorization service](https://github.com/NikitaLubimov/Auth-Service)
 - [Account service](https://github.com/Kiruxin16/accounts)
 - [Subscription service](https://github.com/DenisPugaev/Fitness-Services)
 - [Schedule service](https://github.com/Kiruxin16/schedule)
 
-Взаимодействие с приложение осуществляется через [фронт-энд](https://github.com/AlexanderNaide/FitnessClub). Для подключения требуется набрать в адресной строке браузера http://localhost:3000/index.html
+Взаимодействие с приложение осуществляется через [фронт-энд](https://github.com/AlexanderNaide/FitnessClub). Для подключения требуется набрать в адресной строке браузера http://localhost:8080
 
 # Возможности проекта
 
 ## Вход
 
-Для работы с приложением требуется авторизоваться. Если учетной записи нет можно создать новую.
+Для неавторизованных пользователей сервис представляется в виде сайта со всеё информацией но без возможности взаимодействовать с информационной средой клуба.
 
-![AuthMini](https://github.com/Kiruxin16/accounts/assets/94542550/6285c75b-e1f4-415e-9d2e-d0a16ea467c8)
-![RegMini](https://github.com/Kiruxin16/accounts/assets/94542550/821df4bb-ebf1-41b0-a4d2-982cd36f2549)
+Для доступа к полному функционалу сервиса требуется авторизоваться. 
+![AuthMini](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/log.jpg?raw=true)
+
+Если учетной записи нет можно создать новую.
+![RegMini](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/reg.jpg?raw=true)
 
 
 ## Меню
 
-После взода нам будет доступно основное меню сайта. По умолчанию базово отображается вкладка учетной записи пользователя.
+После входа в основном меню сайта появится вкладка с личными данными, а на остальных вкладках появится возможность приобретать абонементы и записываться на занятия.
 
-![Account](https://github.com/Kiruxin16/accounts/assets/94542550/be95ae32-32b3-4747-a7b4-d50e28853bb1)
+![Menu](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/info.jpg?raw=true)
 
 ## Абонементы
 
-В разделе мои занятия отображается список ваших абонементов.
+В разделе "Услуги" отображается список всех абонементов. При наличие приобретенных абонементов они отображаются вверху отдельным блоком.
 
-![Subscriptions](https://github.com/Kiruxin16/accounts/assets/94542550/22df7edb-7cab-492a-b2d9-fd6e3476a9aa)
+![Subscriptions](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/class1.jpg?raw=true)
 
-При нажатии на кнопку добавить абонемент откроется список доступных абонементов в магазине. Можно "купить" интересующий нажав на кнопку с тележкой.
+При нажатии на карточку абонемента открывается подробная информация с возможностью приобрести.
 
-![Shop](https://github.com/Kiruxin16/accounts/assets/94542550/af69490d-6d9b-4046-ab84-2290f11b013b)
+![Shop](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/class2.jpg?raw=true)
 
 ## Расписание
 
-В разделе "Расписание клуба" пользователю доступен просмотр полного расписания клуба.
+В разделе "Расписание" пользователю доступен просмотр полного расписания клуба.
 
-![General](https://github.com/Kiruxin16/accounts/assets/94542550/bcf6b6a7-c0fd-48de-bdc1-4d5dbf801cf8)
+![General](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/schedule1.jpg?raw=true)
 
 С помощью нажатий на клавиши с названием зала можно отфильтровать занятия по месту их проведения.
 
-![GeneralFiltred](https://github.com/Kiruxin16/accounts/assets/94542550/b2baac41-5f80-4efd-b47e-9480078a29cf)
+![GeneralFiltred](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/schedule2.jpg?raw=true)
 
 ## Запись 
 Записаться на занятия можно при помощи зеленого плюсика в правом верхнем углу занятия. Так же если нажать на само занятие, откроется окно с более подробной информацией о нем. Из этого окна так же можно записаться.
-![EventInfo](https://github.com/Kiruxin16/accounts/assets/94542550/5e5fde76-5b01-4bd4-a993-f8d964beb256)
+![EventInfo](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/schedule3.jpg?raw=true)
 
 После записи занятие отобразится в личном расписании пользователя во вкладке "Мое расписание".
-![Personal](https://github.com/Kiruxin16/accounts/assets/94542550/c236c6fa-9e32-4f72-9e0a-c27d20577bde)
+![Personal](https://github.com/AlexanderNaide/FitnessClub/blob/master/source/schedule4.jpg?raw=true)
 
 Выписаться из занятия можно при помощи нажатия на красный "-" или в окне информации о занятии по кнопке "Отменить запись".
 
